@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2kad.urban | M-Scale Development</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/effects.css">
+  <link rel="stylesheet" href="../assets/css/pages/services.css">
+  <link rel="icon" type="image/png" href="../content/logo brand/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div id="scroll-progress"></div>
+  <div id="cursor-dot" class="cursor-dot"></div>
+  <div id="cursor-trail" class="cursor-trail"></div>
+
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader-grid">
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+    </div>
+    <div class="loader-caption">m-scale · <span data-current-date>--.--.----</span></div>
+  </div>
+
+  <nav class="site-nav" data-site-nav>
+    <div class="container site-nav-inner">
+      <a class="brand" href="../index.html"><img class="brand-logo" src="../content/logo brand/logo.png" alt="2kad.urban logo"><span>[2kad.urban]</span></a>
+      <div class="nav-links" aria-label="Основная навигация">
+        <a class="nav-link" href="../index.html" data-route="home">Главная</a>
+        <a class="nav-link" href="../about.html" data-route="about.html">О компании</a>
+        <a class="nav-link" href="../projects.html" data-route="projects.html">Кейсы</a>
+        <a class="nav-link" href="../process.html" data-route="process.html">Процесс</a>
+        <a class="nav-link" href="index.html" data-route="services">Сервисы</a>
+        <a class="nav-link" href="../contacts.html" data-route="contacts.html">Контакты</a>
+      </div>
+      <div class="status-pill"><span class="dot"></span><span>AI core active</span></div>
+      <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню"><i data-lucide="menu"></i></button>
+    </div>
+  </nav>
+
+  <div class="menu-backdrop" data-menu-backdrop></div>
+  <aside class="menu-panel" id="mobile-menu" data-menu-panel>
+    <div class="menu-head"><p class="menu-title">Navigation</p><button class="menu-close" type="button" data-menu-close aria-label="Закрыть меню"><i data-lucide="x"></i></button></div>
+    <nav class="menu-links">
+      <a href="../index.html" data-mobile-link data-route="home">Главная</a>
+      <a href="../about.html" data-mobile-link data-route="about.html">О компании</a>
+      <a href="../projects.html" data-mobile-link data-route="projects.html">Кейсы</a>
+      <a href="../process.html" data-mobile-link data-route="process.html">Процесс</a>
+      <a href="index.html" data-mobile-link data-route="services">Сервисы</a>
+      <a href="../contacts.html" data-mobile-link data-route="contacts.html">Контакты</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="service-hero">
+      <div class="bg"><img src="../content/Gemini_Generated_Image_k7v7p5k7v7p5k7v7.png" alt="M-scale development" data-parallax data-speed="0.07" data-scale="1.03"></div>
+      <div class="container inner">
+        <div data-reveal="up">
+          <span class="kicker">M-Scale</span>
+          <h1 class="display-xl" style="max-width: 14ch;">Development и жилые кварталы</h1>
+          <p class="lead" style="margin-top:1rem; max-width:58ch;">
+            Направление для девелоперских задач среднего масштаба: жилые группы, кварталы,
+            mixed-use сценарии и поэтапная реализация территории.
+          </p>
+          <div class="service-facts">
+            <div class="fact"><p class="name">тип</p><p class="val">девелопмент</p></div>
+            <div class="fact"><p class="name">масштаб</p><p class="val">5–50 га</p></div>
+            <div class="fact"><p class="name">фокус</p><p class="val">ТЭП + phasing</p></div>
+          </div>
+          <ul class="feature-list">
+            <li>Сценарный расчет плотности и функциональной структуры.</li>
+            <li>Гибкая очередь ввода и логика развития проекта по этапам.</li>
+            <li>Архитектурная идентичность квартала и общественных зон.</li>
+          </ul>
+        </div>
+        <div class="photo-frame" data-reveal="zoom"><img src="../content/Gemini_Generated_Image_geaqpigeaqpigeaq.png" alt="Residential development"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Deliverables</span>
+        <h2 class="display-lg" data-reveal="up">Пакет M-Scale</h2>
+        <div class="deliverables" style="margin-top:1rem;">
+          <article class="deliverable" data-reveal="up"><h4>Модель территории</h4><p>Функциональное зонирование, улично-дорожная структура, общественные пространства.</p></article>
+          <article class="deliverable" data-reveal="left"><h4>ТЭП и варианты</h4><p>Расчет ключевых метрик для нескольких сценариев с визуальным сравнением.</p></article>
+          <article class="deliverable" data-reveal="zoom"><h4>Архитектурная концепция</h4><p>Фасадные принципы, масштабирование корпусов, визуальный код квартала.</p></article>
+          <article class="deliverable" data-reveal="up"><h4>Инвест-материалы</h4><p>Понятный пакет для внутреннего одобрения и презентации партнерам проекта.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Timeline</span>
+        <h2 class="display-lg" data-reveal="up">Этапность M-Scale</h2>
+        <div class="timeline" style="margin-top:1rem;">
+          <article class="timeline-step" data-reveal="up"><span class="num">1</span><div><h5>Аналитический старт</h5><p>Собираем ограничения, данные по контексту, транспорту и инженерным вводным.</p></div></article>
+          <article class="timeline-step" data-reveal="left"><span class="num">2</span><div><h5>Сценарии развития</h5><p>Формируем варианты с разной плотностью, программой и структурой очередей.</p></div></article>
+          <article class="timeline-step" data-reveal="zoom"><span class="num">3</span><div><h5>Оптимизация</h5><p>Сверяем архитектуру и экономику, выбираем рабочую стратегию запуска.</p></div></article>
+          <article class="timeline-step" data-reveal="up"><span class="num">4</span><div><h5>Презентация решения</h5><p>Передаем финальную схему и комплект для дальнейшей реализации.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Gallery</span>
+        <h2 class="display-lg" data-reveal="up">Примеры M-Scale визуализации</h2>
+        <div class="service-gallery" style="margin-top:1rem;">
+          <article class="item" data-reveal="up"><img src="../content/Gemini_Generated_Image_k7v7p5k7v7p5k7v7.png" alt="Masterplan"><p class="cap">Композиция квартала и публичных пространств.</p></article>
+          <article class="item" data-reveal="zoom"><img src="../content/Gemini_Generated_Image_f9i6ibf9i6ibf9i6.png" alt="Blocks"><p class="cap">Масштабирование жилых блоков и дворовых сценариев.</p></article>
+          <article class="item" data-reveal="left"><img src="../content/Gemini_Generated_Image_k7v7p5k7v7p5k7v7.png" alt="Boulevard"><p class="cap">Интеграция уличного фронта и городской активности.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><h3>2kad.urban</h3><p class="muted">M-Scale сервис для девелоперских задач среднего масштаба.</p><p class="chip" style="margin-top:.9rem;width:max-content;">Дата: <span data-current-date>--.--.----</span></p></div>
+      <div><p class="kicker" style="margin-bottom:.6rem;">Scale links</p><p><a href="s.html">S-Scale</a><br><a href="m.html">M-Scale</a><br><a href="l.html">L-Scale</a><br><a href="invest.html">Invest</a></p></div>
+      <div><p class="kicker" style="margin-bottom:.6rem;">Contact</p><p><a href="tel:+74822415768">+7 (4822) 41-57-68</a></p><p><a href="mailto:info@2kad.ru">info@2kad.ru</a></p></div>
+    </div>
+    <div class="container footer-meta">© 2026 2kad.urban — All rights reserved.</div>
+  </footer>
+
+  <script type="module" src="../assets/js/app.js"></script>
+</body>
+</html>
+

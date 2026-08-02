@@ -1,0 +1,19 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors / temp
+*.bak
+*.swp
+*.tmp
+*.swo
+*~
+
+# Local dumps / one-off backups
+tver-dump-*/
+
+# Deps
+node_modules/
+
+# Logs
+*.log

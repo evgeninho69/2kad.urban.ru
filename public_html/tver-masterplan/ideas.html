@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Карта идей | Портал мастер-плана Твери</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/effects.css">
+  <link rel="stylesheet" href="../assets/css/pages/tver-portal.css?v=20260520-5">
+  <link rel="icon" type="image/png" href="../content/logo brand/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div id="scroll-progress"></div>
+  <div id="cursor-dot" class="cursor-dot"></div>
+  <div id="cursor-trail" class="cursor-trail"></div>
+
+  <nav class="site-nav" data-site-nav>
+    <div class="container site-nav-inner">
+      <a class="brand" href="../index.html">
+        <img class="brand-logo" src="../content/logo brand/logo.png" alt="2kad.urban logo">
+        <span>[2kad.urban]</span>
+      </a>
+
+      <div class="nav-links" aria-label="Основная навигация">
+        <a class="nav-link" href="../index.html" data-route="home">Главная</a>
+        <a class="nav-link" href="../about.html" data-route="about.html">О компании</a>
+        <a class="nav-link" href="../projects.html" data-route="projects.html">Кейсы</a>
+        <a class="nav-link" href="../process.html" data-route="process.html">Процесс</a>
+        <a class="nav-link" href="../services/index.html" data-route="services">Сервисы</a>
+        <a class="nav-link" href="../contacts.html" data-route="contacts.html">Контакты</a>
+        <a class="nav-link" href="/tver-masterplan/" data-route="tver-masterplan">Мастер-план Твери</a>
+      </div>
+
+      <div class="status-pill">
+        <span class="dot"></span>
+        <span>Мастер-план Твери</span>
+      </div>
+
+      <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="menu-backdrop" data-menu-backdrop></div>
+  <aside class="menu-panel" id="mobile-menu" data-menu-panel>
+    <div class="menu-head">
+      <p class="menu-title">Меню</p>
+      <button class="menu-close" type="button" data-menu-close aria-label="Закрыть меню">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <nav class="menu-links">
+      <a href="../index.html" data-mobile-link data-route="home">Главная</a>
+      <a href="../about.html" data-mobile-link data-route="about.html">О компании</a>
+      <a href="../projects.html" data-mobile-link data-route="projects.html">Кейсы</a>
+      <a href="../process.html" data-mobile-link data-route="process.html">Процесс</a>
+      <a href="../services/index.html" data-mobile-link data-route="services">Сервисы</a>
+      <a href="../contacts.html" data-mobile-link data-route="contacts.html">Контакты</a>
+      <a href="/tver-masterplan/" data-mobile-link data-route="tver-masterplan">Мастер-план Твери</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="portal-hero">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Карта инициатив</span>
+        <h1 class="display-xl" data-reveal="up" style="max-width: 14ch;">Карта идей для мастер-плана Твери</h1>
+        <p class="lead" data-reveal="up" style="max-width: 62ch; margin-top: 1rem;">
+          Любой участник может отметить точку на карте, описать идею, приложить изображение и сразу опубликовать инициативу.
+          Публичный банк идей со списком и карточками вынесен на отдельную страницу.
+        </p>
+        <div class="portal-links" data-reveal="up">
+          <a class="btn btn-primary" href="ideas-bank.html">Открыть банк идей</a>
+          <a class="btn btn-ghost" href="survey.html">Перейти к опросу</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container portal-layout">
+        <article class="portal-card" data-reveal="up">
+          <div class="ideas-map-head">
+            <h3>Публичная карта инициатив</h3>
+            <label class="form-field" style="min-width: 260px; margin: 0;">
+              <span>Фильтр по теме</span>
+              <select data-ideas-filter>
+                <option value="">Все темы</option>
+                <option value="transport">Транспорт</option>
+                <option value="ecology">Экология</option>
+                <option value="landscaping">Благоустройство</option>
+                <option value="housing">Жилье и застройка</option>
+                <option value="economy">Экономика</option>
+                <option value="culture">Культура</option>
+                <option value="tourism">Туризм</option>
+                <option value="social">Социальная инфраструктура</option>
+                <option value="mobility">Пешеходная и веломобильность</option>
+                <option value="safety">Безопасность</option>
+                <option value="other">Другое</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="ideas-legend" data-ideas-legend></div>
+
+          <div class="portal-map-shell">
+            <div id="ideas-map" data-ideas-map data-map-center-lat="56.8587" data-map-center-lon="35.9176" data-map-zoom="11"></div>
+          </div>
+          <p class="portal-muted" style="margin-top: 0.65rem;">Нажмите на карту, чтобы подставить координаты в форму.</p>
+        </article>
+
+        <article class="portal-card" data-reveal="left">
+          <h3>Новые идеи</h3>
+          <div class="idea-list" data-idea-list>
+            <p class="portal-muted">Загрузка идей...</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <article class="portal-card" data-reveal="up">
+          <span class="kicker">Добавить идею</span>
+          <h3>Публикация инициативы</h3>
+          <form class="portal-form" data-idea-form>
+            <input type="hidden" name="policyVersion" value="">
+            <input class="form-honeypot" type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true">
+
+            <div class="portal-form-grid">
+              <label class="form-field">
+                <span>Заголовок</span>
+                <input type="text" name="title" maxlength="160" required>
+              </label>
+              <label class="form-field">
+                <span>Тема</span>
+                <select name="theme" required>
+                  <option value="">Выберите тему</option>
+                  <option value="transport">Транспорт</option>
+                  <option value="ecology">Экология</option>
+                  <option value="landscaping">Благоустройство</option>
+                  <option value="housing">Жилье и застройка</option>
+                  <option value="economy">Экономика</option>
+                  <option value="culture">Культура</option>
+                  <option value="tourism">Туризм</option>
+                  <option value="social">Социальная инфраструктура</option>
+                  <option value="mobility">Пешеходная и веломобильность</option>
+                  <option value="safety">Безопасность</option>
+                  <option value="other">Другое</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="form-field">
+              <span>Описание идеи</span>
+              <textarea name="description" rows="4" maxlength="3000" required></textarea>
+            </label>
+
+            <div class="portal-form-grid">
+              <label class="form-field">
+                <span>Адрес / ориентир</span>
+                <input type="text" name="address" maxlength="240" required>
+              </label>
+              <label class="form-field">
+                <span>Район (опционально)</span>
+                <input type="text" name="district" maxlength="120">
+              </label>
+            </div>
+
+            <div class="portal-form-grid">
+              <label class="form-field">
+                <span>Широта</span>
+                <input type="number" step="0.000001" name="latitude" required>
+              </label>
+              <label class="form-field">
+                <span>Долгота</span>
+                <input type="number" step="0.000001" name="longitude" required>
+              </label>
+            </div>
+
+            <div class="portal-form-grid">
+              <label class="form-field">
+                <span>Имя автора</span>
+                <input type="text" name="authorName" maxlength="120" required>
+              </label>
+              <label class="form-field">
+                <span>Email (опционально)</span>
+                <input type="email" name="authorEmail" maxlength="160">
+              </label>
+              <label class="form-field">
+                <span>Телефон (опционально)</span>
+                <input type="text" name="authorPhone" maxlength="40">
+              </label>
+              <div class="form-field">
+                <span>Обратная связь</span>
+                <label class="portal-consent" style="margin-top: 0.4rem;">
+                  <span><input type="checkbox" name="allowFeedback" checked> Разрешаю обратную связь по инициативе</span>
+                </label>
+              </div>
+            </div>
+
+            <label class="form-field">
+              <span>Изображение к идее (опционально)</span>
+              <input type="file" name="ideaImage" accept="image/png,image/jpeg,image/webp" data-idea-image-input>
+            </label>
+            <div class="idea-image-preview" data-idea-image-preview hidden>
+              <img src="" alt="Превью изображения идеи" data-idea-image-preview-img>
+            </div>
+
+            <div class="portal-consent">
+              <label>
+                <input type="checkbox" name="consent" required>
+                <span>Даю согласие на передачу и обработку персональных данных для целей публикации инициативы.</span>
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit" data-idea-submit>Опубликовать идею</button>
+            </div>
+            <p class="portal-status" data-idea-status></p>
+          </form>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>2kad.urban</h3>
+        <p class="muted">Карта инициатив для мастер-плана Твери.</p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Навигация</p>
+        <p><a href="index.html">Главная портала</a><br><a href="survey.html">Опрос горожан</a><br><a href="ideas-bank.html">Банк идей</a><br><a href="../index.html">Сайт 2kad.urban</a></p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Контакты</p>
+        <p><a href="mailto:info@2kad.ru">info@2kad.ru</a></p>
+      </div>
+    </div>
+    <div class="container footer-meta">© 2026 2kad.urban - Портал мастер-плана Твери.</div>
+  </footer>
+
+  <script type="module" src="../assets/js/app.js?v=20260520-5"></script>
+</body>
+</html>
+
+
+
+
+
+
+

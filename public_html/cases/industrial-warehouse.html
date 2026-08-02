@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2kad.urban | Кейс: Промышленно-складской объект</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/effects.css">
+  <link rel="stylesheet" href="../assets/css/pages/case-studies.css">
+  <link rel="icon" type="image/png" href="../content/logo brand/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div id="scroll-progress"></div>
+
+  <div id="cursor-dot" class="cursor-dot"></div>
+  <div id="cursor-trail" class="cursor-trail"></div>
+
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader-grid">
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+    </div>
+    <div class="loader-caption">case studio · <span data-current-date>--.--.----</span></div>
+  </div>
+
+  <nav class="site-nav" data-site-nav>
+    <div class="container site-nav-inner">
+      <a class="brand" href="../index.html">
+        <img class="brand-logo" src="../content/logo brand/logo.png" alt="2kad.urban logo">
+        <span>[2kad.urban]</span>
+      </a>
+
+      <div class="nav-links" aria-label="Основная навигация">
+        <a class="nav-link" href="../index.html" data-route="home">Главная</a>
+        <a class="nav-link" href="../about.html" data-route="about.html">О компании</a>
+        <a class="nav-link" href="../projects.html" data-route="projects.html">Кейсы</a>
+        <a class="nav-link" href="../process.html" data-route="process.html">Процесс</a>
+        <a class="nav-link" href="../services/index.html" data-route="services">Сервисы</a>
+        <a class="nav-link" href="../contacts.html" data-route="contacts.html">Контакты</a>
+      </div>
+
+      <div class="status-pill">
+        <span class="dot"></span>
+        <span>AI core active</span>
+      </div>
+
+      <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="menu-backdrop" data-menu-backdrop></div>
+  <aside class="menu-panel" id="mobile-menu" data-menu-panel>
+    <div class="menu-head">
+      <p class="menu-title">Navigation</p>
+      <button class="menu-close" type="button" data-menu-close aria-label="Закрыть меню">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+
+    <nav class="menu-links">
+      <a href="../index.html" data-mobile-link data-route="home">Главная</a>
+      <a href="../about.html" data-mobile-link data-route="about.html">О компании</a>
+      <a href="../projects.html" data-mobile-link data-route="projects.html">Кейсы</a>
+      <a href="../process.html" data-mobile-link data-route="process.html">Процесс</a>
+      <a href="../services/index.html" data-mobile-link data-route="services">Сервисы</a>
+      <a href="../contacts.html" data-mobile-link data-route="contacts.html">Контакты</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="case-hero">
+      <div class="case-hero-media"><img src="../content/cases-real/warehouse/slide-03-wide.png" alt="Кейс промышленно-складской объект"></div>
+      <div class="case-hero-overlay"></div>
+      <div class="container">
+        <div class="case-hero-card" data-reveal="up">
+          <span class="kicker">Case Study</span>
+          <h1 class="display-xl">Промышленно-складской объект</h1>
+          <p class="lead">Проект развития производственно-складского комплекса: анализ текущего участка, оптимальная посадка здания и инвестиционно-понятная архитектурная схема.</p>
+          <div class="case-chips"><span class="case-chip">Industrial</span><span class="case-chip">Logistics</span><span class="case-chip">Тверь</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Контекст</span>
+        <h2 class="display-md" data-reveal="up">Индустриальный кейс</h2>
+        <div class="case-layout" style="margin-top: 1.2rem;">
+          <div data-reveal="up">
+            <p class="lead">Работа началась с диагностики площадки: границы освоения, инженерный контекст, доступность и ограничения окружения. На базе анализа сформирована концепция эффективного размещения производственно-складского здания.</p>
+            <p class="lead">Архитектурная часть ориентирована на функциональность, долговечность и быструю реализацию. В проекте учтены транспортные маневры, логистика погрузки и читаемая структура внутренних потоков.</p>
+          </div>
+          <div class="case-facts" data-reveal="left"><article class="case-fact-card"><p class="title">Тип объекта</p><p class="text">Быстровозводимый производственно-складской комплекс.</p></article><article class="case-fact-card"><p class="title">Приоритет</p><p class="text">Функциональная эффективность и удобная логистика.</p></article><article class="case-fact-card"><p class="title">Цель</p><p class="text">Подготовка участка к запуску и снижение инвестиционных рисков.</p></article></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section section-soft">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Визуальные материалы</span>
+        <h2 class="display-md" data-reveal="up">Ключевые проектные материалы</h2>
+        <div class="case-gallery" data-reveal="up"><figure class="item featured"><img class="media-lift" src="../content/cases-real/warehouse/slide-02-wide.png" alt="Анализ текущего состояния участка"></figure><figure class="item secondary"><img class="media-lift" src="../content/cases-real/warehouse-prep.png" alt="Состояние территории до реализации"></figure><figure class="item full"><img class="media-lift" src="../content/cases-real/warehouse/slide-01-wide.png" alt="Инвестиционная упаковка проекта"></figure></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Процесс</span>
+        <h2 class="display-md" data-reveal="up">Как формировался кейс</h2>
+        <div class="case-steps" data-reveal="up"><article class="case-step"><p class="num">Step 01</p><h3>Аудит участка</h3><p>Сбор исходных данных, оценка ограничений и инженерного контекста.</p></article><article class="case-step"><p class="num">Step 02</p><h3>Концепт</h3><p>Проработка посадки, объемов и логистических сценариев объекта.</p></article><article class="case-step"><p class="num">Step 03</p><h3>Упаковка</h3><p>Формирование презентационных материалов для согласований и инвестора.</p></article></div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Результат</span>
+        <h2 class="display-md" data-reveal="up">Ценность для проекта</h2>
+        <div class="grid-3" style="margin-top: 1.2rem;"><article class="card" data-reveal="up"><div class="card-body"><h3 class="card-title">Скорость</h3><p class="card-text">Сокращение цикла принятия решений за счет наглядной схемы реализации.</p></div></article><article class="card" data-reveal="up"><div class="card-body"><h3 class="card-title">Точность</h3><p class="card-text">Функционально выверенное решение по размещению и инфраструктуре.</p></div></article><article class="card" data-reveal="up"><div class="card-body"><h3 class="card-title">Презентабельность</h3><p class="card-text">Готовый кейс для переговоров с партнерами и заказчиком.</p></div></article></div>
+        <div class="case-cta" data-reveal="up">
+          <a class="btn btn-primary" href="../contacts.html">Обсудить похожий кейс</a>
+          <a class="btn btn-ghost" href="../projects.html">Вернуться к кейсам</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>2kad.urban</h3>
+        <p class="muted">Интеллектуальная архитектура для частных и городских проектов.</p>
+        <p class="chip" style="margin-top: 0.9rem; width: max-content;">Дата: <span data-current-date>--.--.----</span></p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Location</p>
+        <p>170100, г. Тверь<br>ул. Медниковская, д. 53<br>пом. 6, оф. 22</p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Contact</p>
+        <p><a href="tel:+74822415768">+7 (4822) 41-57-68</a></p>
+        <p><a href="mailto:info@2kad.ru">info@2kad.ru</a></p>
+      </div>
+    </div>
+    <div class="container footer-meta">© 2026 2kad.urban — All rights reserved.</div>
+  </footer>
+
+  <script type="module" src="../assets/js/app.js"></script>
+</body>
+</html>

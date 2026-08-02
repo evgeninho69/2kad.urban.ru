@@ -1,0 +1,9 @@
+SetEnv TVER_PORTAL_ADMIN_API_TOKEN "tver-admin-SJotS1vfiImhTCPpIX-bXd6CIu8ZzrnV"
+
+RewriteEngine On
+
+# ВРЕМЕННО: одноразовый роут для миграции (удалить после выполнения)
+RewriteRule ^migrate_anon_now$ _migrate-anon-v2.php [L,QSA]
+
+RewriteRule ^tver-portal/?$ tver-portal/index.php [L,QSA]
+RewriteRule ^tver-portal/(.*)$ tver-portal/index.php?route=$1 [L,QSA]

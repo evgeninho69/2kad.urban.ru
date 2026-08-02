@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2kad.urban | Сервисы 2КАД</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/effects.css">
+  <link rel="stylesheet" href="../assets/css/pages/services.css">
+  <link rel="icon" type="image/png" href="../content/logo brand/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div id="scroll-progress"></div>
+
+  <div id="cursor-dot" class="cursor-dot"></div>
+  <div id="cursor-trail" class="cursor-trail"></div>
+
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader-grid">
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+    </div>
+    <div class="loader-caption">cadastre service · <span data-current-date>--.--.----</span></div>
+  </div>
+
+  <nav class="site-nav" data-site-nav>
+    <div class="container site-nav-inner">
+      <a class="brand" href="../index.html">
+        <img class="brand-logo" src="../content/logo brand/logo.png" alt="2kad.urban logo">
+        <span>[2kad.urban]</span>
+      </a>
+
+      <div class="nav-links" aria-label="Основная навигация">
+        <a class="nav-link" href="../index.html" data-route="home">Главная</a>
+        <a class="nav-link" href="../about.html" data-route="about.html">О компании</a>
+        <a class="nav-link" href="../projects.html" data-route="projects.html">Кейсы</a>
+        <a class="nav-link" href="../process.html" data-route="process.html">Процесс</a>
+        <a class="nav-link" href="index.html" data-route="services">Сервисы</a>
+        <a class="nav-link" href="../contacts.html" data-route="contacts.html">Контакты</a>
+      </div>
+
+      <div class="status-pill">
+        <span class="dot"></span>
+        <span>AI core active</span>
+      </div>
+
+      <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="menu-backdrop" data-menu-backdrop></div>
+  <aside class="menu-panel" id="mobile-menu" data-menu-panel>
+    <div class="menu-head">
+      <p class="menu-title">Navigation</p>
+      <button class="menu-close" type="button" data-menu-close aria-label="Закрыть меню">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+
+    <nav class="menu-links">
+      <a href="../index.html" data-mobile-link data-route="home">Главная</a>
+      <a href="../about.html" data-mobile-link data-route="about.html">О компании</a>
+      <a href="../projects.html" data-mobile-link data-route="projects.html">Кейсы</a>
+      <a href="../process.html" data-mobile-link data-route="process.html">Процесс</a>
+      <a href="index.html" data-mobile-link data-route="services">Сервисы</a>
+      <a href="../contacts.html" data-mobile-link data-route="contacts.html">Контакты</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="service-hero service-hero--calc">
+      <div class="bg" aria-hidden="true"></div>
+      <div class="container inner">
+        <div data-reveal="up">
+          <span class="kicker">Сервисы 2КАД</span>
+          <h1 class="display-xl" style="max-width: 15ch;">Калькулятор кадастровой стоимости</h1>
+          <p class="lead" style="margin-top: 1rem; max-width: 58ch;">
+            Инструмент для предварительной оценки изменения кадастровой стоимости и налоговой нагрузки
+            после изменения характеристик объекта недвижимости.
+          </p>
+
+          <div class="service-facts">
+            <div class="fact">
+              <p class="name">режим</p>
+              <p class="val">тестовый</p>
+            </div>
+            <div class="fact">
+              <p class="name">основа</p>
+              <p class="val">УПКС + факторы</p>
+            </div>
+            <div class="fact">
+              <p class="name">результат</p>
+              <p class="val">стоимость + налог</p>
+            </div>
+          </div>
+
+          <div class="service-actions">
+            <a class="btn btn-primary" href="kadastrovaya-stoimost/index.html">
+              Открыть калькулятор
+              <i data-lucide="calculator"></i>
+            </a>
+            <a class="btn btn-ghost" href="kadastrovaya-stoimost/rules.html">Правила расчета</a>
+          </div>
+        </div>
+
+        <div class="calc-hero-panel" data-reveal="zoom">
+          <span class="tool-mark">Digital service</span>
+          <h2>Быстрая проверка сценария</h2>
+          <p>Укажите текущую стоимость, площадь, ВРИ и прогнозные изменения. Сервис покажет предварительную динамику кадастровой стоимости, налога и порога 300 млн рублей.</p>
+          <div class="calc-panel-grid">
+            <div><span>01</span><strong>Упрощенный расчет</strong></div>
+            <div><span>02</span><strong>Профессиональный режим</strong></div>
+            <div><span>03</span><strong>Методика и факторы</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>2kad.urban</h3>
+        <p class="muted">Кадастровый калькулятор и методические материалы к расчету.</p>
+        <p class="chip" style="margin-top: 0.9rem; width: max-content;">Дата: <span data-current-date>--.--.----</span></p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Калькулятор</p>
+        <p><a href="kadastrovaya-stoimost/index.html">Упрощенный расчет</a><br><a href="kadastrovaya-stoimost/professional.html">Профессиональный расчет</a><br><a href="kadastrovaya-stoimost/rules.html">Правила расчета</a></p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Contact</p>
+        <p><a href="tel:+74822415768">+7 (4822) 41-57-68</a></p>
+        <p><a href="mailto:info@2kad.ru">info@2kad.ru</a></p>
+      </div>
+    </div>
+    <div class="container footer-meta">© 2026 2kad.urban — All rights reserved.</div>
+  </footer>
+
+  <script type="module" src="../assets/js/app.js"></script>
+</body>
+</html>
+
