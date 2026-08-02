@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Модерация и аналитика | Портал мастер-плана Твери</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/effects.css">
+  <link rel="stylesheet" href="../assets/css/pages/tver-portal.css?v=20260520-7">
+  <link rel="icon" type="image/png" href="../content/logo brand/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div id="scroll-progress"></div>
+  <div id="cursor-dot" class="cursor-dot"></div>
+  <div id="cursor-trail" class="cursor-trail"></div>
+
+  <nav class="site-nav" data-site-nav>
+    <div class="container site-nav-inner">
+      <a class="brand" href="../index.html">
+        <img class="brand-logo" src="../content/logo brand/logo.png" alt="2kad.urban logo">
+        <span>[2kad.urban]</span>
+      </a>
+
+      <div class="nav-links" aria-label="Основная навигация">
+        <a class="nav-link" href="../index.html" data-route="home">Главная</a>
+        <a class="nav-link" href="../about.html" data-route="about.html">О компании</a>
+        <a class="nav-link" href="../projects.html" data-route="projects.html">Кейсы</a>
+        <a class="nav-link" href="../process.html" data-route="process.html">Процесс</a>
+        <a class="nav-link" href="../services/index.html" data-route="services">Сервисы</a>
+        <a class="nav-link" href="../contacts.html" data-route="contacts.html">Контакты</a>
+        <a class="nav-link" href="/tver-masterplan/" data-route="tver-masterplan">Мастер-план Твери</a>
+      </div>
+
+      <div class="status-pill">
+        <span class="dot"></span>
+        <span>Мастер-план Твери</span>
+      </div>
+
+      <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="menu-backdrop" data-menu-backdrop></div>
+  <aside class="menu-panel" id="mobile-menu" data-menu-panel>
+    <div class="menu-head">
+      <p class="menu-title">Меню</p>
+      <button class="menu-close" type="button" data-menu-close aria-label="Закрыть меню">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <nav class="menu-links">
+      <a href="../index.html" data-mobile-link data-route="home">Главная</a>
+      <a href="../about.html" data-mobile-link data-route="about.html">О компании</a>
+      <a href="../projects.html" data-mobile-link data-route="projects.html">Кейсы</a>
+      <a href="../process.html" data-mobile-link data-route="process.html">Процесс</a>
+      <a href="../services/index.html" data-mobile-link data-route="services">Сервисы</a>
+      <a href="../contacts.html" data-mobile-link data-route="contacts.html">Контакты</a>
+      <a href="/tver-masterplan/" data-mobile-link data-route="tver-masterplan">Мастер-план Твери</a>
+    </nav>
+  </aside>
+
+  <main data-portal-admin>
+    <section class="portal-hero">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Модерация и аналитика</span>
+        <h1 class="display-xl" data-reveal="up" style="max-width: 14ch;">Административная панель портала</h1>
+        <p class="lead" data-reveal="up" style="max-width: 62ch; margin-top: 1rem;">
+          Управление очередью идей, обработка запросов субъектов ПДн и мониторинг ключевых метрик участия.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <article class="portal-card" data-reveal="up">
+          <span class="kicker">Доступ модератора</span>
+          <div class="portal-form-grid">
+            <label class="form-field">
+                <span>Служебный токен доступа</span>
+                <input type="password" data-admin-token placeholder="Введите токен">
+            </label>
+            <div class="form-actions" style="display:flex; align-items:flex-end;">
+              <button class="btn btn-primary" type="button" data-admin-load>Загрузить данные</button>
+            </div>
+          </div>
+          <p class="portal-status" data-admin-status></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container" data-admin-analytics>
+        <span class="kicker" data-reveal="up">Аналитика</span>
+        <h2 class="display-md" data-reveal="up">Оперативные показатели</h2>
+        <div class="portal-analytics-grid" style="margin-top:1rem;" data-reveal="up">
+          <div class="item"><p class="label">Анкет всего</p><p class="value" data-analytics-key="surveysTotal">—</p></div>
+          <div class="item"><p class="label">Идей всего</p><p class="value" data-analytics-key="ideasTotal">—</p></div>
+          <div class="item"><p class="label">Идеи по статусам</p><p class="value" data-analytics-key="ideasByStatus">—</p></div>
+          <div class="item"><p class="label">Одобренные по темам</p><p class="value" data-analytics-key="approvedByTheme">—</p></div>
+          <div class="item"><p class="label">Запросы ПДн</p><p class="value" data-analytics-key="personalDataRequestsTotal">—</p></div>
+          <div class="item"><p class="label">Статусы запросов ПДн</p><p class="value" data-analytics-key="personalDataRequestsByStatus">—</p></div>
+          <div class="item"><p class="label">Версия политики</p><p class="value" data-analytics-key="policyVersion">—</p></div>
+          <div class="item"><p class="label">Срок хранения</p><p class="value" data-analytics-key="retentionDays">—</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container" data-admin-surveys>
+        <article class="portal-card" data-reveal="up">
+          <div class="admin-survey-head">
+            <div>
+              <span class="kicker">Опрос горожан</span>
+              <h3>Дашборд результатов</h3>
+              <p class="portal-muted">Распределения по возрасту, районам, темам, оценкам и лента последних анкет.</p>
+            </div>
+            <div class="admin-survey-actions">
+              <button class="btn btn-ghost" type="button" data-survey-export="csv">Скачать анкеты CSV</button>
+              <button class="btn btn-ghost" type="button" data-survey-export="json">Скачать анкеты JSON</button>
+            </div>
+          </div>
+
+          <div class="survey-filter-panel">
+            <label class="form-field">
+              <span>Дата с</span>
+              <input type="date" data-survey-filter="dateFrom">
+            </label>
+            <label class="form-field">
+              <span>Дата по</span>
+              <input type="date" data-survey-filter="dateTo">
+            </label>
+            <label class="form-field">
+              <span>Район / территория</span>
+              <select data-survey-filter="district">
+                <option value="">Все территории</option>
+              </select>
+            </label>
+            <label class="form-field">
+              <span>Возрастная группа</span>
+              <select data-survey-filter="ageGroup">
+                <option value="">Все возрастные группы</option>
+              </select>
+            </label>
+            <div class="survey-filter-actions">
+              <button class="btn btn-ghost" type="button" data-survey-filter-reset>Сбросить фильтры</button>
+            </div>
+          </div>
+
+          <p class="survey-filter-meta" data-survey-filter-meta>Показано 0 из 0 анкет.</p>
+
+          <div class="survey-kpi-grid">
+            <div class="item">
+              <p class="label">Анкет всего</p>
+              <p class="value" data-survey-kpi="total">—</p>
+            </div>
+            <div class="item">
+              <p class="label">Средняя оценка</p>
+              <p class="value" data-survey-kpi="avgSatisfaction">—</p>
+            </div>
+            <div class="item">
+              <p class="label">С Email</p>
+              <p class="value" data-survey-kpi="withEmail">—</p>
+            </div>
+            <div class="item">
+              <p class="label">С приоритетным проектом</p>
+              <p class="value" data-survey-kpi="withPriority">—</p>
+            </div>
+            <div class="item">
+              <p class="label">Территорий участия</p>
+              <p class="value" data-survey-kpi="districts">—</p>
+            </div>
+          </div>
+
+          <div class="survey-dashboard-grid">
+            <article class="survey-chart-card">
+              <h4>Возрастные группы</h4>
+              <div class="survey-bar-list" data-survey-chart="age"></div>
+            </article>
+            <article class="survey-chart-card">
+              <h4>Районы и территории</h4>
+              <div class="survey-bar-list" data-survey-chart="district"></div>
+            </article>
+            <article class="survey-chart-card">
+              <h4>Темы развития</h4>
+              <div class="survey-bar-list" data-survey-chart="topic"></div>
+            </article>
+            <article class="survey-chart-card">
+              <h4>Удовлетворенность средой</h4>
+              <div class="survey-bar-list" data-survey-chart="satisfaction"></div>
+            </article>
+          </div>
+
+          <article class="survey-recent-card">
+            <h4>Последние анкеты</h4>
+            <div class="survey-recent-list" data-admin-surveys-recent>
+              <p class="portal-muted">Загрузите данные, чтобы увидеть список анкет.</p>
+            </div>
+          </article>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container admin-grid">
+        <article class="portal-card" data-reveal="up">
+          <span class="kicker">Модерация идей</span>
+          <h3>Очередь публикации</h3>
+          <div class="admin-list" data-admin-moderation-list>
+            <p class="portal-muted">Загрузка...</p>
+          </div>
+        </article>
+
+        <article class="portal-card" data-reveal="left">
+          <span class="kicker">Запросы субъектов ПДн</span>
+          <h3>Обработка обращений</h3>
+          <div class="admin-list" data-admin-pd-list>
+            <p class="portal-muted">Загрузка...</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>2kad.urban</h3>
+        <p class="muted">Рабочая панель модерации и аналитики портала мастер-плана Твери.</p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Навигация</p>
+        <p><a href="index.html">Главная портала</a><br><a href="survey.html">Опрос</a><br><a href="ideas.html">Карта идей</a><br><a href="ideas-bank.html">Банк идей</a></p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Контакты</p>
+        <p><a href="mailto:info@2kad.ru">info@2kad.ru</a></p>
+      </div>
+    </div>
+    <div class="container footer-meta">© 2026 2kad.urban - Служебный раздел портала мастер-плана Твери.</div>
+  </footer>
+
+  <script type="module" src="../assets/js/app.js?v=20260520-7"></script>
+</body>
+</html>
+
+
+
+
+
+
+

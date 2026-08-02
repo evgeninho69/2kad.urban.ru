@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2kad.urban | Кейс: Изворотень / Солнечная долина</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/effects.css">
+  <link rel="stylesheet" href="../assets/css/pages/case-studies.css">
+  <link rel="icon" type="image/png" href="../content/logo brand/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div id="scroll-progress"></div>
+
+  <div id="cursor-dot" class="cursor-dot"></div>
+  <div id="cursor-trail" class="cursor-trail"></div>
+
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader-grid">
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+    </div>
+    <div class="loader-caption">case studio · <span data-current-date>--.--.----</span></div>
+  </div>
+
+  <nav class="site-nav" data-site-nav>
+    <div class="container site-nav-inner">
+      <a class="brand" href="../index.html">
+        <img class="brand-logo" src="../content/logo brand/logo.png" alt="2kad.urban logo">
+        <span>[2kad.urban]</span>
+      </a>
+
+      <div class="nav-links" aria-label="Основная навигация">
+        <a class="nav-link" href="../index.html" data-route="home">Главная</a>
+        <a class="nav-link" href="../about.html" data-route="about.html">О компании</a>
+        <a class="nav-link" href="../projects.html" data-route="projects.html">Кейсы</a>
+        <a class="nav-link" href="../process.html" data-route="process.html">Процесс</a>
+        <a class="nav-link" href="../services/index.html" data-route="services">Сервисы</a>
+        <a class="nav-link" href="../contacts.html" data-route="contacts.html">Контакты</a>
+      </div>
+
+      <div class="status-pill">
+        <span class="dot"></span>
+        <span>AI core active</span>
+      </div>
+
+      <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="menu-backdrop" data-menu-backdrop></div>
+  <aside class="menu-panel" id="mobile-menu" data-menu-panel>
+    <div class="menu-head">
+      <p class="menu-title">Navigation</p>
+      <button class="menu-close" type="button" data-menu-close aria-label="Закрыть меню">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+
+    <nav class="menu-links">
+      <a href="../index.html" data-mobile-link data-route="home">Главная</a>
+      <a href="../about.html" data-mobile-link data-route="about.html">О компании</a>
+      <a href="../projects.html" data-mobile-link data-route="projects.html">Кейсы</a>
+      <a href="../process.html" data-mobile-link data-route="process.html">Процесс</a>
+      <a href="../services/index.html" data-mobile-link data-route="services">Сервисы</a>
+      <a href="../contacts.html" data-mobile-link data-route="contacts.html">Контакты</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="case-hero">
+      <div class="case-hero-media"><img src="../content/cases-real/solnechnaya-dolina/slide-01-wide.png" alt="Кейс Изворотень / Солнечная долина"></div>
+      <div class="case-hero-overlay"></div>
+      <div class="container">
+        <div class="case-hero-card" data-reveal="up">
+          <span class="kicker">Case Study</span>
+          <h1 class="display-xl">Изворотень / Солнечная долина</h1>
+          <p class="lead">Комплексный кейс территории с двумя презентациями в единой логике: инвестиционный профиль проекта и концепция премиального формата проживания.</p>
+          <div class="case-chips"><span class="case-chip">Investment</span><span class="case-chip">Premium village</span><span class="case-chip">Masterplan</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Контекст</span>
+        <h2 class="display-md" data-reveal="up">Один кейс, две презентации</h2>
+        <div class="case-layout" style="margin-top: 1.2rem;">
+          <div data-reveal="up">
+            <p class="lead">Проект «Солнечная долина» оформлен как единый кейс, где инвестиционная часть и продуктовая концепция поселка дополняют друг друга. Такой формат помогает синхронизировать архитектурную идею, девелоперскую стратегию и коммуникацию с партнерами.</p>
+            <p class="lead">В материалах собраны сценарии развития территории, структура застройки, акценты по позиционированию и визуальная упаковка для презентации проекта в переговорах и на этапах принятия решений.</p>
+          </div>
+          <div class="case-facts" data-reveal="left">
+            <article class="case-fact-card"><p class="title">Формат</p><p class="text">Единый кейс на основе двух презентаций с общей логикой подачи.</p></article>
+            <article class="case-fact-card"><p class="title">Фокус</p><p class="text">Инвестиционная привлекательность и премиальное позиционирование среды.</p></article>
+            <article class="case-fact-card"><p class="title">Результат</p><p class="text">Понятный комплект материалов для обсуждения с инвесторами и заказчиком.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section section-soft">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Визуальные материалы</span>
+        <h2 class="display-md" data-reveal="up">Ключевые слайды кейса</h2>
+        <div class="case-gallery" data-reveal="up">
+          <figure class="item featured"><img class="media-lift" src="../content/cases-real/solnechnaya-dolina/slide-01-wide.png" alt="Инвестиционная часть кейса Солнечная долина"></figure>
+          <figure class="item secondary"><img class="media-lift" src="../content/cases-real/solnechnaya-dolina/slide-02-wide.png" alt="Премиальная концепция Солнечная долина"></figure>
+          <figure class="item full"><img class="media-lift" src="../content/cases-real/solnechnaya-dolina/slide-03-wide.png" alt="Материалы по развитию территории проекта"></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Материалы</span>
+        <h2 class="display-md" data-reveal="up">Две презентации внутри одного кейса</h2>
+        <div class="grid-3" style="margin-top: 1.2rem;">
+          <article class="card" data-reveal="up">
+            <div class="card-body">
+              <h3 class="card-title">Investment Portfolio</h3>
+              <p class="card-text">Инвестиционный профиль проекта: потенциал территории, сценарии освоения и презентационная логика для партнеров.</p>
+              <a class="btn btn-ghost" href="../content/cases-real/solnechnaya-dolina-investment-portfolio.pdf" target="_blank" rel="noopener">Открыть PDF</a>
+            </div>
+          </article>
+          <article class="card" data-reveal="up">
+            <div class="card-body">
+              <h3 class="card-title">Premium Village</h3>
+              <p class="card-text">Продуктовая презентация премиального формата: архитектурный образ, структура застройки и ценностное позиционирование.</p>
+              <a class="btn btn-ghost" href="../content/cases-real/solnechnaya-dolina-premium-village.pdf" target="_blank" rel="noopener">Открыть PDF</a>
+            </div>
+          </article>
+          <article class="card" data-reveal="up">
+            <div class="card-body">
+              <h3 class="card-title">Сводный эффект</h3>
+              <p class="card-text">Вместе эти материалы дают целостную картину: от инвестиционной модели до архитектурного качества среды.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Результат</span>
+        <h2 class="display-md" data-reveal="up">Что получает заказчик</h2>
+        <div class="grid-3" style="margin-top: 1.2rem;">
+          <article class="card" data-reveal="up"><div class="card-body"><h3 class="card-title">Целостность</h3><p class="card-text">Одна структура кейса вместо разрозненных материалов.</p></div></article>
+          <article class="card" data-reveal="up"><div class="card-body"><h3 class="card-title">Презентабельность</h3><p class="card-text">Готовые документы для коммуникации с инвесторами и партнерами.</p></div></article>
+          <article class="card" data-reveal="up"><div class="card-body"><h3 class="card-title">Управляемость</h3><p class="card-text">Понятная логика перехода от концепции к реализации проекта.</p></div></article>
+        </div>
+        <div class="case-cta" data-reveal="up">
+          <a class="btn btn-primary" href="../contacts.html">Обсудить похожий кейс</a>
+          <a class="btn btn-ghost" href="../projects.html">Вернуться к кейсам</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>2kad.urban</h3>
+        <p class="muted">Интеллектуальная архитектура для частных и городских проектов.</p>
+        <p class="chip" style="margin-top: 0.9rem; width: max-content;">Дата: <span data-current-date>--.--.----</span></p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Location</p>
+        <p>170100, г. Тверь<br>ул. Медниковская, д. 53<br>пом. 6, оф. 22</p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Contact</p>
+        <p><a href="tel:+74822415768">+7 (4822) 41-57-68</a></p>
+        <p><a href="mailto:info@2kad.ru">info@2kad.ru</a></p>
+      </div>
+    </div>
+    <div class="container footer-meta">© 2026 2kad.urban — All rights reserved.</div>
+  </footer>
+
+  <script type="module" src="../assets/js/app.js"></script>
+</body>
+</html>

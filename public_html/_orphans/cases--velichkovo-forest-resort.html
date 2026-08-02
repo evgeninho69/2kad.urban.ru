@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2kad.urban | Кейс: Величково Forest & Resort</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/effects.css">
+  <link rel="icon" type="image/png" href="../content/logo brand/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .case-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .case-viewer {
+      margin-top: 1.2rem;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(194, 166, 110, 0.3);
+      box-shadow: var(--shadow-soft);
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .case-viewer iframe {
+      display: block;
+      width: 100%;
+      height: min(82vh, 980px);
+      border: 0;
+      background: #fff;
+    }
+
+    @media (max-width: 900px) {
+      .case-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .case-viewer iframe {
+        height: min(70vh, 720px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="scroll-progress"></div>
+
+  <div id="cursor-dot" class="cursor-dot"></div>
+  <div id="cursor-trail" class="cursor-trail"></div>
+
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader-grid">
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+    </div>
+    <div class="loader-caption">case view · <span data-current-date>--.--.----</span></div>
+  </div>
+
+  <nav class="site-nav" data-site-nav>
+    <div class="container site-nav-inner">
+      <a class="brand" href="../index.html">
+        <img class="brand-logo" src="../content/logo brand/logo.png" alt="2kad.urban logo">
+        <span>[2kad.urban]</span>
+      </a>
+
+      <div class="nav-links" aria-label="Основная навигация">
+        <a class="nav-link" href="../index.html" data-route="home">Главная</a>
+        <a class="nav-link" href="../about.html" data-route="about.html">О компании</a>
+        <a class="nav-link" href="../projects.html" data-route="projects.html">Кейсы</a>
+        <a class="nav-link" href="../process.html" data-route="process.html">Процесс</a>
+        <a class="nav-link" href="../services/index.html" data-route="services">Сервисы</a>
+        <a class="nav-link" href="../contacts.html" data-route="contacts.html">Контакты</a>
+      </div>
+
+      <div class="status-pill">
+        <span class="dot"></span>
+        <span>AI core active</span>
+      </div>
+
+      <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="menu-backdrop" data-menu-backdrop></div>
+  <aside class="menu-panel" id="mobile-menu" data-menu-panel>
+    <div class="menu-head">
+      <p class="menu-title">Navigation</p>
+      <button class="menu-close" type="button" data-menu-close aria-label="Закрыть меню">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+
+    <nav class="menu-links">
+      <a href="../index.html" data-mobile-link data-route="home">Главная</a>
+      <a href="../about.html" data-mobile-link data-route="about.html">О компании</a>
+      <a href="../projects.html" data-mobile-link data-route="projects.html">Кейсы</a>
+      <a href="../process.html" data-mobile-link data-route="process.html">Процесс</a>
+      <a href="../services/index.html" data-mobile-link data-route="services">Сервисы</a>
+      <a href="../contacts.html" data-mobile-link data-route="contacts.html">Контакты</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="page-hero">
+      <img class="hero-image" src="../content/cases-real/velichkovo-masterplan.png" alt="Кейс Величково Forest and Resort" data-parallax data-speed="0.06" data-scale="1.03">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <span class="kicker" data-reveal="up">Case presentation</span>
+        <h1 class="display-lg" data-reveal="up" style="max-width: 16ch;">Величково Forest & Resort</h1>
+        <p class="lead" data-reveal="up" style="max-width: 62ch; margin-top: 1rem;">Курортно-жилая среда в Жуковском районе: планировочный каркас, общественные пространства и архитектурные решения поселка.</p>
+        <div class="page-links" data-reveal="up" style="margin-top: 1rem;">
+          <a class="page-link-chip" href="../projects.html">Все кейсы</a>
+          <a class="page-link-chip" href="../contacts.html">Обсудить проект</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Документы</span>
+        <h2 class="display-md" data-reveal="up">Актуальная презентация кейса</h2>
+
+        <div class="case-meta" data-reveal="up">
+          <article class="card">
+            <div class="card-body">
+              <h3 class="card-title">Формат</h3>
+              <p class="card-text">PDF презентация проекта</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-body">
+              <h3 class="card-title">Источник</h3>
+              <p class="card-text">Папка <code>content/Кейсы</code> (актуальная версия)</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-body">
+              <h3 class="card-title">Скачать</h3>
+              <p class="card-text"><a href="../content/cases-real/velichkovo-forest-resort.pdf" target="_blank" rel="noopener">Открыть PDF в новой вкладке</a></p>
+            </div>
+          </article>
+        </div>
+
+        <div class="case-viewer" data-reveal="up">
+          <iframe src="../content/cases-real/velichkovo-forest-resort.pdf#view=FitH" title="Величково Forest & Resort — презентация"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>2kad.urban</h3>
+        <p class="muted">Интеллектуальная архитектура для частных и городских проектов.</p>
+        <p class="chip" style="margin-top: 0.9rem; width: max-content;">Дата: <span data-current-date>--.--.----</span></p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Location</p>
+        <p>170100, г. Тверь<br>ул. Медниковская, д. 53<br>пом. 6, оф. 22</p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Contact</p>
+        <p><a href="tel:+74822415768">+7 (4822) 41-57-68</a></p>
+        <p><a href="mailto:info@2kad.ru">info@2kad.ru</a></p>
+      </div>
+    </div>
+    <div class="container footer-meta">© 2026 2kad.urban — All rights reserved.</div>
+  </footer>
+
+  <script type="module" src="../assets/js/app.js"></script>
+</body>
+</html>
+

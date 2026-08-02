@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2kad.urban | Процесс</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/effects.css">
+  <link rel="icon" type="image/png" href="content/logo brand/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div id="scroll-progress"></div>
+
+  <div id="cursor-dot" class="cursor-dot"></div>
+  <div id="cursor-trail" class="cursor-trail"></div>
+
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader-grid">
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+      <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+    </div>
+    <div class="loader-caption">workflow · <span data-current-date>--.--.----</span></div>
+  </div>
+
+  <nav class="site-nav" data-site-nav>
+    <div class="container site-nav-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="content/logo brand/logo.png" alt="2kad.urban logo">
+        <span>[2kad.urban]</span>
+      </a>
+
+      <div class="nav-links" aria-label="Основная навигация">
+        <a class="nav-link" href="index.html" data-route="home">Главная</a>
+        <a class="nav-link" href="about.html" data-route="about.html">О компании</a>
+        <a class="nav-link" href="projects.html" data-route="projects.html">Кейсы</a>
+        <a class="nav-link" href="process.html" data-route="process.html">Процесс</a>
+        <a class="nav-link" href="services/index.html" data-route="services">Сервисы</a>
+        <a class="nav-link" href="contacts.html" data-route="contacts.html">Контакты</a>
+        <a class="nav-link" href="/tver-masterplan/" data-route="tver-masterplan">Мастер-план Твери</a>
+      </div>
+
+      <div class="status-pill">
+        <span class="dot"></span>
+        <span>AI core active</span>
+      </div>
+
+      <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="menu-backdrop" data-menu-backdrop></div>
+  <aside class="menu-panel" id="mobile-menu" data-menu-panel>
+    <div class="menu-head">
+      <p class="menu-title">Меню</p>
+      <button class="menu-close" type="button" data-menu-close aria-label="Закрыть меню">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+
+    <nav class="menu-links">
+      <a href="index.html" data-mobile-link data-route="home">Главная</a>
+      <a href="about.html" data-mobile-link data-route="about.html">О компании</a>
+      <a href="projects.html" data-mobile-link data-route="projects.html">Кейсы</a>
+      <a href="process.html" data-mobile-link data-route="process.html">Процесс</a>
+      <a href="services/index.html" data-mobile-link data-route="services">Сервисы</a>
+      <a href="contacts.html" data-mobile-link data-route="contacts.html">Контакты</a>
+      <a href="/tver-masterplan/" data-mobile-link data-route="tver-masterplan">Мастер-план Твери</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="page-hero">
+      <img class="hero-image" src="content/Gemini_Generated_Image_geaqpigeaqpigeaq.png" alt="Процесс проектирования" data-parallax data-speed="0.07" data-scale="1.03">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <span class="kicker" data-reveal="up">Workflow</span>
+        <h1 class="display-xl" data-reveal="up" style="max-width: 15ch;">Прозрачный архитектурный процесс</h1>
+        <p class="lead" data-reveal="up" style="max-width: 62ch; margin-top: 1rem;">
+          Мы разбиваем проект на этапы с понятными результатами и контрольными точками.
+          Заказчик видит, как идея превращается в реализуемую модель — без потери темпа и качества.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <span class="kicker" data-reveal="up">Step-by-step</span>
+        <h2 class="display-lg" data-reveal="up">Этапы работы</h2>
+
+        <div class="grid-2" style="margin-top: 1.2rem;">
+          <article class="card" data-reveal="up">
+            <div class="card-body">
+              <p class="kicker" style="margin-bottom: 0.5rem;">Step 01</p>
+              <h3 class="card-title">Сбор исходных данных</h3>
+              <p class="card-text">Анализируем участок, правовые ограничения, контекст окружения и целевые KPI проекта.</p>
+            </div>
+          </article>
+
+          <article class="card" data-reveal="left">
+            <div class="card-body">
+              <p class="kicker" style="margin-bottom: 0.5rem;">Step 02</p>
+              <h3 class="card-title">Генерация сценариев</h3>
+              <p class="card-text">Формируем несколько архитектурных направлений с разной плотностью, функционалом и градостроительной логикой.</p>
+            </div>
+          </article>
+
+          <article class="card" data-reveal="zoom">
+            <div class="card-body">
+              <p class="kicker" style="margin-bottom: 0.5rem;">Step 03</p>
+              <h3 class="card-title">Оценка эффективности</h3>
+              <p class="card-text">Считаем технико-экономические параметры, проверяем риски и формируем аргументацию для инвестрешений.</p>
+            </div>
+          </article>
+
+          <article class="card" data-reveal="up">
+            <div class="card-body">
+              <p class="kicker" style="margin-bottom: 0.5rem;">Step 04</p>
+              <h3 class="card-title">Презентация и запуск</h3>
+              <p class="card-text">Передаем комплект материалов для согласования, маркетинга и старта последующей стадии проектирования.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container grid-2" style="align-items: center; gap: 1.3rem;">
+        <article data-reveal="up">
+          <span class="kicker">Timing model</span>
+          <h2 class="display-md" style="max-width: 16ch;">Контроль темпа на каждом этапе</h2>
+          <p class="lead" style="margin-top: 0.9rem;">
+            В процессе нет «черных ящиков»: вы всегда понимаете текущий статус,
+            принятые решения и следующий шаг. Это помогает синхронизировать участников и сокращать операционные потери.
+          </p>
+
+          <div class="stats-row" style="margin-top: 1rem;">
+            <div class="stat-card glass-soft">
+              <p class="label">Шаги процесса</p>
+              <p class="value">4</p>
+            </div>
+            <div class="stat-card glass-soft">
+              <p class="label">Контрольных точек</p>
+              <p class="value">12+</p>
+            </div>
+            <div class="stat-card glass-soft">
+              <p class="label">Вариантов сценария</p>
+              <p class="value">3–6</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-reveal="zoom">
+          <img class="media-lift" src="content/Gemini_Generated_Image_1qwty71qwty71qwt.png" alt="Инвестиционная презентация" style="height: 420px; width: 100%; object-fit: cover;">
+        </article>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="container">
+        <div class="cta-band glass" data-reveal="zoom">
+          <span class="kicker" style="margin-bottom: 0.5rem;">Start</span>
+          <h2 class="display-md" style="max-width: 16ch;">Запустим процесс под ваш проект</h2>
+          <p class="lead" style="max-width: 56ch; margin-top: 0.8rem;">
+            Сформируем дорожную карту, набор deliverables и структуру взаимодействия команды с понятной точкой результата.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:1rem;">
+            <a class="btn btn-primary" href="contacts.html">Обсудить проект</a>
+            <a class="btn btn-ghost" href="services/index.html">Смотреть сервисы</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>2kad.urban</h3>
+        <p class="muted">Архитектурный workflow от анализа до инвестиционной презентации.</p>
+        <p class="chip" style="margin-top: 0.9rem; width: max-content;">Дата: <span data-current-date>--.--.----</span></p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Location</p>
+        <p>170100, г. Тверь<br>ул. Медниковская, д. 53<br>пом. 6, оф. 22</p>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom: 0.6rem;">Contact</p>
+        <p><a href="tel:+74822415768">+7 (4822) 41-57-68</a></p>
+        <p><a href="mailto:info@2kad.ru">info@2kad.ru</a></p>
+      </div>
+    </div>
+    <div class="container footer-meta">© 2026 2kad.urban — All rights reserved.</div>
+  </footer>
+
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
+
+
+

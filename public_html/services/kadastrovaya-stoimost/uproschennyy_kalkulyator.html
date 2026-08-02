@@ -1,0 +1,332 @@
+﻿<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2kad.urban | Калькулятор кадастровой стоимости</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="styles_simple.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/effects.css">
+    <link rel="stylesheet" href="site-adapter.css">
+    <link rel="icon" type="image/png" href="../../content/logo brand/logo.png">
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="calc-page calc-page--simple">
+    <div id="scroll-progress"></div>
+    <div id="cursor-dot" class="cursor-dot"></div>
+    <div id="cursor-trail" class="cursor-trail"></div>
+
+    <div id="loader" class="loader" aria-hidden="true">
+      <div class="loader-grid">
+        <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+        <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+        <div class="loader-box"></div><div class="loader-box"></div><div class="loader-box"></div>
+      </div>
+      <div class="loader-caption">quick calc · <span data-current-date>--.--.----</span></div>
+    </div>
+
+    <nav class="site-nav" data-site-nav>
+      <div class="container site-nav-inner">
+        <a class="brand" href="../../index.html">
+          <img class="brand-logo" src="../../content/logo brand/logo.png" alt="2kad.urban logo">
+          <span>[2kad.urban]</span>
+        </a>
+
+        <div class="nav-links" aria-label="Основная навигация">
+          <a class="nav-link" href="../../index.html" data-route="home">Главная</a>
+          <a class="nav-link" href="../../about.html" data-route="about.html">О компании</a>
+          <a class="nav-link" href="../../projects.html" data-route="projects.html">Кейсы</a>
+          <a class="nav-link" href="../../process.html" data-route="process.html">Процесс</a>
+          <a class="nav-link" href="../index.html" data-route="services">Сервисы</a>
+          <a class="nav-link" href="../../contacts.html" data-route="contacts.html">Контакты</a>
+        </div>
+
+        <div class="status-pill">
+          <span class="dot"></span>
+          <span>AI core active</span>
+        </div>
+
+        <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </nav>
+
+    <div class="menu-backdrop" data-menu-backdrop></div>
+    <aside class="menu-panel" id="mobile-menu" data-menu-panel>
+      <div class="menu-head">
+        <p class="menu-title">Navigation</p>
+        <button class="menu-close" type="button" data-menu-close aria-label="Закрыть меню">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <nav class="menu-links">
+        <a href="../../index.html" data-mobile-link data-route="home">Главная</a>
+        <a href="../../about.html" data-mobile-link data-route="about.html">О компании</a>
+        <a href="../../projects.html" data-mobile-link data-route="projects.html">Кейсы</a>
+        <a href="../../process.html" data-mobile-link data-route="process.html">Процесс</a>
+        <a href="../index.html" data-mobile-link data-route="services">Сервисы</a>
+        <a href="../../contacts.html" data-mobile-link data-route="contacts.html">Контакты</a>
+      </nav>
+    </aside>
+
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Сервис 2КАД · основной режим</p>
+        <h1>Упрощенный расчет кадастровой стоимости и налоговой нагрузки</h1>
+      </div>
+      <div class="topbar__note">
+        <span>Режим расчета</span>
+        <strong>Укрупненные характеристики</strong>
+        <a class="topbar__button" href="professional.html">Открыть профессиональный расчет</a>
+        <a class="topbar__link" href="rules.html">Правила расчета</a>
+        <a class="topbar__link topbar__link--muted" href="../index.html">К списку сервисов</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="calc-disclaimer" aria-label="Дисклеймер">
+        <div>
+          <strong>Калькулятор работает в тестовом режиме</strong>
+          <p>Результаты являются предварительными и не заменяют утвержденные сведения ЕГРН, результаты государственной кадастровой оценки и расчет налогового органа. Замечания и предложения направляйте на <a href="mailto:info@2kad.ru?subject=%D0%94%D0%BB%D1%8F%20%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%BE%D0%B2">info@2kad.ru</a> с темой письма «Для разработчиков».</p>
+        </div>
+        <a class="calc-disclaimer__link" href="rules.html">Смотреть правила расчета</a>
+      </section>
+
+      <section class="method-band" aria-label="Порядок расчета">
+        <div>
+          <strong>Базовый принцип</strong>
+          <p>Текущая кадастровая стоимость принимается как исходная база, а прогноз формируется по укрупненным коэффициентам площади, ВРИ, капитальности стен, инженерного обеспечения и ограничений.</p>
+        </div>
+        <div>
+          <strong>Назначение</strong>
+          <p>Вариант подходит для оперативной оценки до подачи документов на изменение характеристик объекта.</p>
+        </div>
+      </section>
+
+      <section class="simple-grid" aria-label="Сведения для расчета">
+        <div class="section-title">
+          <p class="eyebrow">Исходные сведения</p>
+          <h2>Текущее состояние объекта</h2>
+        </div>
+
+        <label>
+          <span>Вид объекта</span>
+          <select id="objectType">
+            <option value="house">Жилой дом</option>
+            <option value="flat">Квартира</option>
+            <option value="room">Комната</option>
+            <option value="land">Земельный участок</option>
+            <option value="garage">Гараж или машино-место</option>
+            <option value="other">Нежилой объект</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Правообладатель</span>
+          <select id="taxpayerType">
+            <option value="person">Физическое лицо</option>
+            <option value="organization">Организация</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Текущая кадастровая стоимость, руб.</span>
+          <input id="currentCadastralValue" type="number" min="0" step="1000" value="12000000">
+        </label>
+
+        <label>
+          <span>Текущая площадь, кв. м</span>
+          <input id="currentArea" type="number" min="0.1" step="0.1" value="120">
+        </label>
+
+        <label>
+          <span>Текущий ВРИ</span>
+          <select id="currentUse">
+            <option value="residential">Жилая эксплуатация</option>
+            <option value="individualHousing">ИЖС, ЛПХ, садоводство</option>
+            <option value="agriculture">Сельскохозяйственное использование</option>
+            <option value="business">Предпринимательство</option>
+            <option value="industry">Производственная деятельность</option>
+            <option value="public">Общественное использование</option>
+            <option value="recreation">Отдых и рекреация</option>
+            <option value="transport">Транспортное использование</option>
+            <option value="other">Иное использование</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Капитальность стен</span>
+          <select id="currentCapital">
+            <option value="capital">Капитальные конструкции</option>
+            <option value="mixed">Смешанные конструкции</option>
+            <option value="light">Облегченные конструкции</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Инженерное обеспечение</span>
+          <select id="currentInfrastructure">
+            <option value="minimal">Минимальное</option>
+            <option value="base">Базовое</option>
+            <option value="improved">Улучшенное</option>
+            <option value="full">Полное</option>
+          </select>
+        </label>
+
+        <label>
+          <span>ЗОУИТ и ограничения</span>
+          <select id="currentRestriction">
+            <option value="none">Ограничения не выявлены</option>
+            <option value="moderate">Умеренные ограничения</option>
+            <option value="strong">Существенные ограничения</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Доля в праве, %</span>
+          <input id="ownershipShare" type="number" min="1" max="100" step="1" value="100">
+        </label>
+
+        <label>
+          <span>Период владения, месяцев</span>
+          <input id="ownershipMonths" type="number" min="1" max="12" step="1" value="12">
+        </label>
+
+        <label>
+          <span>Снижение по налоговой льготе, %</span>
+          <input id="taxBenefit" type="number" min="0" max="100" step="1" value="0">
+        </label>
+
+        <label>
+          <span>Налог за предыдущий период, руб.</span>
+          <input id="previousTax" type="number" min="0" step="100" value="0">
+        </label>
+
+        <div class="section-title section-title--second">
+          <p class="eyebrow">Прогноз</p>
+          <h2>Укрупненные изменения</h2>
+        </div>
+
+        <label>
+          <span>Площадь после изменений, кв. м</span>
+          <input id="forecastArea" type="number" min="0.1" step="0.1" value="140">
+        </label>
+
+        <label>
+          <span>ВРИ после изменений</span>
+          <select id="forecastUse">
+            <option value="residential">Жилая эксплуатация</option>
+            <option value="individualHousing">ИЖС, ЛПХ, садоводство</option>
+            <option value="agriculture">Сельскохозяйственное использование</option>
+            <option value="business" selected>Предпринимательство</option>
+            <option value="industry">Производственная деятельность</option>
+            <option value="public">Общественное использование</option>
+            <option value="recreation">Отдых и рекреация</option>
+            <option value="transport">Транспортное использование</option>
+            <option value="other">Иное использование</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Капитальность стен после изменений</span>
+          <select id="forecastCapital">
+            <option value="capital" selected>Капитальные конструкции</option>
+            <option value="mixed">Смешанные конструкции</option>
+            <option value="light">Облегченные конструкции</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Инженерное обеспечение после изменений</span>
+          <select id="forecastInfrastructure">
+            <option value="minimal">Минимальное</option>
+            <option value="base">Базовое</option>
+            <option value="improved" selected>Улучшенное</option>
+            <option value="full">Полное</option>
+          </select>
+        </label>
+
+        <label>
+          <span>ЗОУИТ и ограничения после изменений</span>
+          <select id="forecastRestriction">
+            <option value="none" selected>Ограничения не выявлены</option>
+            <option value="moderate">Умеренные ограничения</option>
+            <option value="strong">Существенные ограничения</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="actions" aria-label="Действия">
+        <button id="calculate" type="button">Сформировать прогноз</button>
+      </section>
+
+      <section class="results" aria-label="Итоги расчета">
+        <div class="section-title">
+          <p class="eyebrow">Итоги</p>
+          <h2>Сравнение текущего и прогнозного состояния</h2>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-item">
+            <span>Прогнозная кадастровая стоимость</span>
+            <strong id="forecastValue">0 руб.</strong>
+          </div>
+          <div class="summary-item">
+            <span>Изменение кадастровой стоимости</span>
+            <strong id="valueDelta">0 руб.</strong>
+          </div>
+          <div class="summary-item">
+            <span>Изменение налоговой нагрузки</span>
+            <strong id="taxDelta">0 руб.</strong>
+          </div>
+          <div class="summary-item">
+            <span>Вероятное снижение налоговой нагрузки</span>
+            <strong id="taxReductionPercent">0 %</strong>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Показатель</th>
+                <th>Текущее состояние</th>
+                <th>Прогноз после изменений</th>
+              </tr>
+            </thead>
+            <tbody id="resultRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <section class="results-footer" aria-label="Закрепленные итоги">
+      <div class="results-footer__item">
+        <span>Изменение стоимости</span>
+        <strong id="valueDeltaFixed">0 руб.</strong>
+      </div>
+      <div class="results-footer__item">
+        <span>Изменение налога</span>
+        <strong id="taxDeltaFixed">0 руб.</strong>
+      </div>
+      <div class="results-footer__item">
+        <span>Вероятное снижение</span>
+        <strong id="taxReductionPercentFixed">0 %</strong>
+      </div>
+      <div class="results-footer__item">
+        <span>Порог 300 млн руб.</span>
+        <strong id="thresholdStateFixed">Не пересечен</strong>
+      </div>
+    </section>
+
+    <script src="script_simple.js"></script>
+    <script type="module" src="../../assets/js/app.js"></script>
+  </body>
+</html>
+
