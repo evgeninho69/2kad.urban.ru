@@ -9,3 +9,4 @@ node_modules/
 # Telegram bot secrets & one-shot setup (kept on server, never re-uploaded)
 public_html/api/tver-portal/telegram-config.php
 public_html/api/tver-portal/telegram-setup.php
+public_html/api/tver-portal/telegram-publish-history.php

@@ -799,4 +799,6 @@ if ($route === '_migrate_anon' && $method === 'POST') {
     ]);
 }
 
+// ===== ВРЕМЕННЫЕ РОУТЫ (telegram-preview, telegram-publish-history) удалены после публикации архива =====
+
 jsonResponse(404, ['error' => 'Not found']);
