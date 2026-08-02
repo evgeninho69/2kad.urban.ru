@@ -17,3 +17,7 @@ node_modules/
 
 # Logs
 *.log
+
+# Telegram bot secrets & one-shot setup
+public_html/api/tver-portal/telegram-config.php
+public_html/api/tver-portal/telegram-setup.php

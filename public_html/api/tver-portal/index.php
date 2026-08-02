@@ -20,6 +20,11 @@ $config = [
     'adminToken' => 'tver-admin-SJotS1vfiImhTCPpIX-bXd6CIu8ZzrnV',
 ];
 
+// Telegram-уведомления (бот для алертов в админский канал).
+// Файл с конфигом (telegram-config.php) и одноразовый telegram-setup.php
+// должны лежать рядом, в gitignore/deployignore.
+require_once __DIR__ . '/telegram-notify.php';
+
 $dataDir = __DIR__ . '/data';
 $storeFile = $dataDir . '/store.json';
 $uploadsDir = __DIR__ . '/uploads';
@@ -375,6 +380,30 @@ if ($route === 'surveys' && $method === 'POST') {
 
         return $id;
     }, $config['retentionDays']);
+
+    // Уведомление в Telegram-канал админа (best-effort, не ломает ответ).
+    try {
+        $tgCfgFile = __DIR__ . '/telegram-config.php';
+        if (is_file($tgCfgFile)) {
+            $tgCfg = include $tgCfgFile;
+            if (is_array($tgCfg)) {
+                $summaryRecord = [
+                    'id'           => $id,
+                    'ageGroup'     => $ageGroup,
+                    'district'     => $district,
+                    'topics'       => $topics,
+                    'satisfaction' => $satisfaction,
+                    'comment'      => $readOpt($payload, 'comment'),
+                ];
+                $adminUrl = isset($tgCfg['adminUrl']) && is_string($tgCfg['adminUrl']) && $tgCfg['adminUrl'] !== ''
+                    ? $tgCfg['adminUrl']
+                    : '/tver-masterplan/admin.html';
+                telegramSendSurveySummary($summaryRecord, $adminUrl);
+            }
+        }
+    } catch (Throwable $e) {
+        error_log('[survey-notify] ' . $e->getMessage());
+    }
 
     jsonResponse(201, ['ok' => true, 'accepted' => true, 'id' => $id]);
 }
