@@ -5,5 +5,8 @@ RewriteEngine On
 # ВРЕМЕННО: одноразовый роут для миграции (удалить после выполнения)
 RewriteRule ^migrate_anon_now$ _migrate-anon-v2.php [L,QSA]
 
+# Не редиректить запросы к существующим файлам (telegram-setup.php и т.п.)
+RewriteCond %{REQUEST_FILENAME} !-f
+
 RewriteRule ^tver-portal/?$ tver-portal/index.php [L,QSA]
 RewriteRule ^tver-portal/(.*)$ tver-portal/index.php?route=$1 [L,QSA]
