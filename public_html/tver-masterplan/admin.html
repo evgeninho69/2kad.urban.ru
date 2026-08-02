@@ -150,6 +150,14 @@
                 <option value="">Все возрастные группы</option>
               </select>
             </label>
+            <label class="form-field">
+              <span>Анонимность</span>
+              <select data-survey-filter="anonymous">
+                <option value="">Все анкеты</option>
+                <option value="yes">Только анонимные</option>
+                <option value="no">С контактами</option>
+              </select>
+            </label>
             <div class="survey-filter-actions">
               <button class="btn btn-ghost" type="button" data-survey-filter-reset>Сбросить фильтры</button>
             </div>
@@ -161,6 +169,10 @@
             <div class="item">
               <p class="label">Анкет всего</p>
               <p class="value" data-survey-kpi="total">—</p>
+            </div>
+            <div class="item">
+              <p class="label">Анонимных</p>
+              <p class="value" data-survey-kpi="anonymous">—</p>
             </div>
             <div class="item">
               <p class="label">Средняя оценка</p>
@@ -180,6 +192,11 @@
             </div>
           </div>
 
+          <article class="survey-chart-card survey-timeline-card">
+            <h4>Динамика поступления анкет</h4>
+            <div class="survey-timeline-wrap" data-survey-chart="timeline"></div>
+          </article>
+
           <div class="survey-dashboard-grid">
             <article class="survey-chart-card">
               <h4>Возрастные группы</h4>
@@ -196,6 +213,10 @@
             <article class="survey-chart-card">
               <h4>Удовлетворенность средой</h4>
               <div class="survey-bar-list" data-survey-chart="satisfaction"></div>
+            </article>
+            <article class="survey-chart-card survey-pie-card">
+              <h4>Оценки: распределение</h4>
+              <div class="survey-pie-container" data-survey-chart="satisfaction-pie"></div>
             </article>
           </div>
 

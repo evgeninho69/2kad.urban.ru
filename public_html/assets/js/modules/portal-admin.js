@@ -35,6 +35,49 @@ const SATISFACTION_LABELS = {
 
 const AGE_GROUP_ORDER = ['under_18', '18_30', '31_45', '46_60', '60_plus', 'unknown'];
 
+// Lookup table: mojibake labels (from old form double-encoding bug) → proper UTF-8 labels.
+// Only the *labels* were double-encoded; user-entered text is fine.
+// We split comment by lines, and for each line, if it starts with a mojibake label,
+// we replace it with the proper label.
+const MOJIBAKE_LABEL_FIXES = {
+  'РљРѕРјРјРµРЅС‚Р°СЂРёР№ СѓС‡Р°СЃС‚РЅРёРєР°': 'Комментарий участника',
+  'РљРѕРЅС‚РµРєСЃС‚ СѓС‡Р°СЃС‚РёСЏ': 'Контекст участия',
+  'РџСЂРѕР±Р»РµРјС‹ РјРѕР±РёР»СЊРЅРѕСЃС‚Рё': 'Проблемы мобильности',
+  'Р’СЂРµРјСЏ РїРѕРµР·РґРєРё': 'Время поездки',
+  'РђРІС‚Рѕ/РїР°СЂРєРѕРІРєРё/СЃС‚РѕСЏРЅРєРё': 'Авто/парковки/стоянки',
+  'РЈРґР°С‡РЅС‹Рµ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР°': 'Удачные пространства',
+  'Р§РµРіРѕ РЅРµ С…РІР°С‚Р°РµС‚': 'Чего не хватает',
+  'Р”СЂСѓРіРѕРµ РїРѕ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР°Рј': 'Другое по пространствам',
+  'РЎС„РµСЂС‹ СЃ РїСЂРѕР±Р»РµРјР°РјРё РґРѕСЃС‚СѓРїРЅРѕСЃС‚Рё': 'Сферы с проблемами доступности',
+  'РќРµРґРѕСЃС‚Р°СЋС‰РёРµ РѕР±СЉРµРєС‚С‹ РІ СЂР°Р№РѕРЅРµ': 'Недостающие объекты в районе',
+  'Р”РѕРї. РѕР±СЉРµРєС‚С‹ РґР»СЏ Р±Р»РёР·РѕСЃС‚Рё': 'Доп. объекты для близости',
+  'Р“РѕС‚РѕРІРЅРѕСЃС‚СЊ Рє СѓС‡Р°СЃС‚РёСЋ': 'Готовность к участию',
+  'Р—Р°РЅСЏС‚РѕСЃС‚СЊ': 'Занятость',
+  'Р›РѕРєР°С†РёСЏ СЂР°Р±РѕС‚С‹/СѓС‡РµР±С‹': 'Локация работы/учебы',
+  'РџСЂРёРѕСЂРёС‚РµС‚С‹ СЌРєРѕРЅРѕРјРёРєРё': 'Приоритеты экономики',
+  'Р‘Р°СЂСЊРµСЂС‹ РґР»СЏ Р±РёР·РЅРµСЃР°': 'Барьеры для бизнеса',
+  'Р­РєРѕР»РѕРіРёС‡РµСЃРєРёРµ РїСЂРѕР±Р»РµРјС‹': 'Экологические проблемы',
+  'РћР±СЉРµРєС‚С‹ РЅР°СЃР»РµРґРёСЏ': 'Объекты наследия',
+  'РџСЂРёСЂРѕРґРЅС‹Рµ С‚РµСЂСЂРёС‚РѕСЂРёРё': 'Природные территории',
+  'РўСѓСЂРёСЃС‚РёС‡РµСЃРєРёРµ РјР°СЂС€СЂСѓС‚С‹': 'Туристические маршруты',
+  'РџРѕРµР·РґРєРё РўРІРµСЂСЊвЂ“РљР°Р»РёРЅРёРЅСЃРєРёР№ СЂР°Р№РѕРЅ': 'Поездки Тверь–Калининский район',
+  'РњРµР¶С‚РµСЂСЂРёС‚РѕСЂРёР°Р»СЊРЅС‹Рµ СЃРІСЏР·Рё': 'Межтерриториальные связи',
+  'РўРѕРї-3 РїСЂРѕРµРєС‚Р°': 'Топ-3 проекта',
+  'Р РµР·РёРґРµРЅС‚С‹': 'Резиденты',
+  'Р РµР·РёРґРµРЅС‚С‹:': 'Резиденты:',
+};
+
+function fixMojibakeInText(text) {
+  if (!text) return text;
+  let out = text;
+  for (const [bad, good] of Object.entries(MOJIBAKE_LABEL_FIXES)) {
+    if (out.indexOf(bad) !== -1) {
+      out = out.split(bad).join(good);
+    }
+  }
+  return out;
+}
+
 const escapeHtml = (value) => String(value || '')
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -43,7 +86,6 @@ const escapeHtml = (value) => String(value || '')
   .replaceAll("'", '&#39;');
 
 const normalize = (value) => String(value || '').trim();
-const normalizeToken = (value) => normalize(value);
 
 const setStatus = (node, text, tone = 'muted') => {
   if (!node) return;
@@ -62,18 +104,19 @@ const fetchJson = async (url, options = {}) => {
   return body;
 };
 
-const authHeaders = (token) => ({
-  'Content-Type': 'application/json',
-  Authorization: `Bearer ${token}`,
-  'X-Admin-Token': token
-});
+const authHeaders = (token) => {
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+    headers['X-Admin-Token'] = token;
+  }
+  return headers;
+};
 
 const formatObjectSummary = (value) => {
   if (!value || typeof value !== 'object') return '—';
-
   const entries = Object.entries(value);
   if (!entries.length) return '—';
-
   return entries
     .map(([key, amount]) => `${key}: ${amount}`)
     .join(' · ');
@@ -82,14 +125,20 @@ const formatObjectSummary = (value) => {
 const formatDateTime = (value) => {
   const text = normalize(value);
   if (!text) return '—';
-
   const date = new Date(text);
   if (Number.isNaN(date.getTime())) return text;
-
   return new Intl.DateTimeFormat('ru-RU', {
     dateStyle: 'short',
     timeStyle: 'short'
   }).format(date);
+};
+
+const formatDate = (value) => {
+  const text = normalize(value);
+  if (!text) return '—';
+  const date = new Date(text);
+  if (Number.isNaN(date.getTime())) return text;
+  return new Intl.DateTimeFormat('ru-RU', { dateStyle: 'short' }).format(date);
 };
 
 const formatPercent = (count, total) => {
@@ -112,6 +161,8 @@ const resolveAgeLabel = (key) => AGE_GROUP_LABELS[key] || key || 'Не указ�
 const resolveTopicLabel = (key) => TOPIC_LABELS[key] || key || 'Другое';
 const resolveSatisfactionLabel = (key) => SATISFACTION_LABELS[key] || key;
 
+const SAT_COLORS = ['#d6453f', '#e89e3c', '#cfb53b', '#6da34d', '#3d8b6e'];
+
 const parseDateToMs = (value) => {
   const text = normalize(value);
   if (!text) return null;
@@ -131,7 +182,8 @@ const collectSurveyFilters = (controls) => ({
   dateFrom: normalize(controls.dateFrom?.value),
   dateTo: normalize(controls.dateTo?.value),
   district: normalize(controls.district?.value),
-  ageGroup: normalize(controls.ageGroup?.value)
+  ageGroup: normalize(controls.ageGroup?.value),
+  anonymous: normalize(controls.anonymous?.value)
 });
 
 const setSurveyFilterMeta = (node, filteredCount, totalCount) => {
@@ -144,6 +196,7 @@ const applySurveyFilters = (surveys, filters) => {
   const dateToMs = parseFilterDateToMs(filters.dateTo, true);
   const filterDistrict = normalize(filters.district);
   const filterAge = normalize(filters.ageGroup);
+  const filterAnon = normalize(filters.anonymous);
 
   if (dateFromMs !== null && dateToMs !== null && dateFromMs > dateToMs) {
     return [];
@@ -155,6 +208,9 @@ const applySurveyFilters = (surveys, filters) => {
 
     if (filterAge && surveyAge !== filterAge) return false;
     if (filterDistrict && surveyDistrict !== filterDistrict) return false;
+
+    if (filterAnon === 'yes' && survey?.isAnonymous !== true) return false;
+    if (filterAnon === 'no' && survey?.isAnonymous === true) return false;
 
     if (dateFromMs !== null || dateToMs !== null) {
       const createdAtMs = parseDateToMs(survey?.createdAt);
@@ -223,14 +279,9 @@ const buildSurveyStats = (surveys) => {
   const ageCounts = {};
   const districtCounts = {};
   const topicCounts = {};
-  const satisfactionCounts = {
-    '1': 0,
-    '2': 0,
-    '3': 0,
-    '4': 0,
-    '5': 0
-  };
+  const satisfactionCounts = { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 };
 
+  let anonymousCount = 0;
   let withEmail = 0;
   let withPriorityProject = 0;
   let satisfactionSum = 0;
@@ -244,6 +295,7 @@ const buildSurveyStats = (surveys) => {
     const email = normalize(survey.email);
     const priorityProject = normalize(survey.priorityProject);
 
+    if (survey.isAnonymous === true) anonymousCount += 1;
     if (email) withEmail += 1;
     if (priorityProject) withPriorityProject += 1;
 
@@ -264,6 +316,7 @@ const buildSurveyStats = (surveys) => {
 
   return {
     total: surveys.length,
+    anonymousCount,
     withEmail,
     withPriorityProject,
     averageSatisfaction: satisfactionCount ? (satisfactionSum / satisfactionCount) : 0,
@@ -277,8 +330,9 @@ const buildSurveyStats = (surveys) => {
   };
 };
 
-const renderBarChart = (node, entries, total, labelResolver, emptyText = 'Пока нет данных.') => {
+const renderBarChart = (node, entries, total, labelResolver, options = {}) => {
   if (!node) return;
+  const { emptyText = 'Пока нет данных.', palette = null, unit = '' } = options;
 
   const data = Array.isArray(entries)
     ? entries.filter((entry) => Array.isArray(entry) && Number(entry[1]) > 0)
@@ -291,25 +345,157 @@ const renderBarChart = (node, entries, total, labelResolver, emptyText = 'Пок
 
   const maxCount = Math.max(...data.map(([, count]) => Number(count) || 0), 1);
 
-  node.innerHTML = data.map(([rawKey, rawCount]) => {
+  node.innerHTML = data.map(([rawKey, rawCount], idx) => {
     const count = Number(rawCount) || 0;
     const share = total ? Math.round((count / total) * 100) : 0;
-    const width = Math.max(10, Math.round((count / maxCount) * 100));
+    const width = Math.max(8, Math.round((count / maxCount) * 100));
     const label = labelResolver(rawKey);
+    const color = palette
+      ? palette[idx % palette.length]
+      : (rawKey === '1' || rawKey === '2' ? '#d6453f' : rawKey === '3' ? '#cfb53b' : '#3d8b6e');
 
     return `
       <article class="survey-bar-item">
         <div class="survey-bar-head">
           <span>${escapeHtml(label)}</span>
-          <span>${count} (${share}%)</span>
+          <span class="survey-bar-value">${count}${unit} <span class="survey-bar-share">(${share}%)</span></span>
         </div>
-        <div class="survey-bar-track"><span style="width:${width}%"></span></div>
+        <div class="survey-bar-track">
+          <span class="survey-bar-fill" style="width:${width}%; background:${color};"></span>
+        </div>
       </article>
     `;
   }).join('');
 };
 
-const truncate = (value, maxLength = 180) => {
+const renderSatisfactionPie = (node, entries, total) => {
+  if (!node) return;
+  const data = entries.filter(([, count]) => Number(count) > 0);
+  if (!data.length || total <= 0) {
+    node.innerHTML = '<p class="portal-muted">Нет оценок удовлетворенности.</p>';
+    return;
+  }
+
+  const size = 180;
+  const cx = size / 2;
+  const cy = size / 2;
+  const r = 70;
+  let acc = 0;
+  const slices = data.map(([key, count], idx) => {
+    const fraction = count / total;
+    const startAngle = acc * 2 * Math.PI - Math.PI / 2;
+    acc += fraction;
+    const endAngle = acc * 2 * Math.PI - Math.PI / 2;
+    const x1 = cx + r * Math.cos(startAngle);
+    const y1 = cy + r * Math.sin(startAngle);
+    const x2 = cx + r * Math.cos(endAngle);
+    const y2 = cy + r * Math.sin(endAngle);
+    const largeArc = fraction > 0.5 ? 1 : 0;
+    const d = `M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${largeArc} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z`;
+    const color = SAT_COLORS[Number(key) - 1] || '#888';
+    const label = resolveSatisfactionLabel(key);
+    return `<path d="${d}" fill="${color}" data-key="${escapeHtml(key)}"><title>${escapeHtml(label)}: ${count} (${Math.round(fraction * 100)}%)</title></path>`;
+  }).join('');
+
+  const legend = data.map(([key, count]) => {
+    const color = SAT_COLORS[Number(key) - 1] || '#888';
+    const share = Math.round((count / total) * 100);
+    return `<li><span class="dot" style="background:${color};"></span>${escapeHtml(resolveSatisfactionLabel(key))} — ${count} (${share}%)</li>`;
+  }).join('');
+
+  node.innerHTML = `
+    <div class="survey-pie-wrap">
+      <svg viewBox="0 0 ${size} ${size}" class="survey-pie" role="img" aria-label="Распределение оценок удовлетворенности">${slices}</svg>
+      <ul class="survey-pie-legend">${legend}</ul>
+    </div>
+  `;
+};
+
+const renderTimeline = (node, surveys) => {
+  if (!node) return;
+  if (!surveys.length) {
+    node.innerHTML = '<p class="portal-muted">Нет данных по датам.</p>';
+    return;
+  }
+
+  // Group by date (YYYY-MM-DD)
+  const byDate = {};
+  surveys.forEach((s) => {
+    const ms = parseDateToMs(s?.createdAt);
+    if (ms === null) return;
+    const d = new Date(ms);
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    byDate[key] = (byDate[key] || 0) + 1;
+  });
+  const dates = Object.keys(byDate).sort();
+  if (!dates.length) {
+    node.innerHTML = '<p class="portal-muted">Нет данных по датам.</p>';
+    return;
+  }
+
+  // Fill in zero days for a smoother view
+  const first = new Date(dates[0]);
+  const last = new Date(dates[dates.length - 1]);
+  const allDates = [];
+  for (let d = new Date(first); d <= last; d.setDate(d.getDate() + 1)) {
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    allDates.push({ key, count: byDate[key] || 0 });
+  }
+
+  const w = 720, h = 160, pad = 28;
+  const maxCount = Math.max(...allDates.map((d) => d.count), 1);
+  const stepX = allDates.length > 1 ? (w - 2 * pad) / (allDates.length - 1) : 0;
+  const points = allDates.map((d, i) => ({
+    x: pad + i * stepX,
+    y: h - pad - ((d.count / maxCount) * (h - 2 * pad)),
+    count: d.count,
+    key: d.key
+  }));
+
+  const linePath = points.map((p, i) => (i === 0 ? `M ${p.x.toFixed(1)} ${p.y.toFixed(1)}` : `L ${p.x.toFixed(1)} ${p.y.toFixed(1)}`)).join(' ');
+  const areaPath = `${linePath} L ${points[points.length - 1].x.toFixed(1)} ${h - pad} L ${pad} ${h - pad} Z`;
+
+  const dots = points.filter((p) => p.count > 0).map((p) =>
+    `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.5" fill="#3d8b6e"><title>${escapeHtml(p.key)}: ${p.count}</title></circle>`
+  ).join('');
+
+  // Y axis: 0, max/2, max
+  const yTicks = [0, Math.ceil(maxCount / 2), maxCount];
+  const yLabels = yTicks.map((v) => {
+    const y = h - pad - (v / maxCount) * (h - 2 * pad);
+    return `<line x1="${pad}" x2="${w - pad}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}" stroke="#e5e1d8" stroke-dasharray="2 3" />` +
+           `<text x="${pad - 6}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="10" fill="#777">${v}</text>`;
+  }).join('');
+
+  // X axis: 4-5 evenly distributed labels
+  const labelStep = Math.max(1, Math.floor(allDates.length / 5));
+  const xLabels = allDates
+    .map((d, i) => (i % labelStep === 0 || i === allDates.length - 1) ? { d, i } : null)
+    .filter(Boolean)
+    .map(({ d, i }) => {
+      const x = pad + i * stepX;
+      return `<text x="${x.toFixed(1)}" y="${h - pad + 14}" text-anchor="middle" font-size="10" fill="#777">${escapeHtml(d.key.slice(5))}</text>`;
+    }).join('');
+
+  node.innerHTML = `
+    <svg viewBox="0 0 ${w} ${h}" class="survey-timeline" role="img" aria-label="Динамика поступления анкет">
+      <defs>
+        <linearGradient id="timelineFill" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#3d8b6e" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#3d8b6e" stop-opacity="0.02"/>
+        </linearGradient>
+      </defs>
+      ${yLabels}
+      <path d="${areaPath}" fill="url(#timelineFill)"></path>
+      <path d="${linePath}" stroke="#3d8b6e" stroke-width="2" fill="none"></path>
+      ${dots}
+      ${xLabels}
+    </svg>
+    <p class="portal-muted survey-timeline-meta">Всего дней с активностью: ${dates.length}, макс. за день: ${maxCount}.</p>
+  `;
+};
+
+const truncate = (value, maxLength = 280) => {
   const text = normalize(value).replace(/\r?\n+/g, ' ');
   if (text.length <= maxLength) return text;
   return `${text.slice(0, maxLength - 1)}…`;
@@ -329,19 +515,25 @@ const renderRecentSurveys = (surveys, node) => {
       const topics = Array.isArray(survey.topics) && survey.topics.length
         ? survey.topics.map((topic) => resolveTopicLabel(normalize(topic))).join(', ')
         : '—';
+      const isAnon = survey.isAnonymous === true;
+      const fixedComment = fixMojibakeInText(survey.comment || '');
 
       return `
-        <article class="survey-recent-item">
+        <article class="survey-recent-item ${isAnon ? 'is-anonymous' : 'is-identified'}">
           <header>
-            <h4>${escapeHtml(normalize(survey.fullName) || 'Участник')}</h4>
-            <span>${escapeHtml(formatDateTime(survey.createdAt))}</span>
+            <h4>${isAnon ? 'Анонимный участник' : escapeHtml(survey.fullName || 'Участник')}</h4>
+            <span class="survey-recent-meta-line">
+              ${isAnon ? '<span class="chip chip-anon">анонимно</span>' : '<span class="chip chip-id">с контактами</span>'}
+              <span>${escapeHtml(formatDateTime(survey.createdAt))}</span>
+            </span>
           </header>
-          <p>${escapeHtml(truncate(survey.comment || '')) || 'Комментарий не указан.'}</p>
+          <p>${escapeHtml(truncate(fixedComment)) || 'Комментарий не указан.'}</p>
           <div class="survey-recent-meta">
             <span>Возраст: ${escapeHtml(resolveAgeLabel(normalize(survey.ageGroup)))}</span>
             <span>Район: ${escapeHtml(normalize(survey.district) || '—')}</span>
             <span>Темы: ${escapeHtml(topics)}</span>
-            <span>Оценка: ${escapeHtml(String(survey.satisfaction || '—'))}</span>
+            <span>Оценка: ${escapeHtml(String(survey.satisfaction || '—'))} / 5</span>
+            ${normalize(survey.priorityProject) ? `<span>Приоритет: ${escapeHtml(survey.priorityProject)}</span>` : ''}
           </div>
         </article>
       `;
@@ -354,6 +546,7 @@ const renderSurveyDashboard = (surveys, root) => {
 
   const kpiNodes = {
     total: root.querySelector('[data-survey-kpi="total"]'),
+    anonymous: root.querySelector('[data-survey-kpi="anonymous"]'),
     avgSatisfaction: root.querySelector('[data-survey-kpi="avgSatisfaction"]'),
     withEmail: root.querySelector('[data-survey-kpi="withEmail"]'),
     withPriority: root.querySelector('[data-survey-kpi="withPriority"]'),
@@ -361,9 +554,13 @@ const renderSurveyDashboard = (surveys, root) => {
   };
 
   if (kpiNodes.total) kpiNodes.total.textContent = String(stats.total);
+  if (kpiNodes.anonymous) {
+    const share = stats.total ? Math.round((stats.anonymousCount / stats.total) * 100) : 0;
+    kpiNodes.anonymous.textContent = `${stats.anonymousCount} (${share}%)`;
+  }
   if (kpiNodes.avgSatisfaction) {
     kpiNodes.avgSatisfaction.textContent = stats.total
-      ? `${stats.averageSatisfaction.toFixed(1)} / 5`
+      ? `${stats.averageSatisfaction.toFixed(2)} / 5`
       : '—';
   }
   if (kpiNodes.withEmail) {
@@ -380,12 +577,23 @@ const renderSurveyDashboard = (surveys, root) => {
   const districtChartNode = root.querySelector('[data-survey-chart="district"]');
   const topicChartNode = root.querySelector('[data-survey-chart="topic"]');
   const satisfactionChartNode = root.querySelector('[data-survey-chart="satisfaction"]');
+  const satisfactionPieNode = root.querySelector('[data-survey-chart="satisfaction-pie"]');
+  const timelineNode = root.querySelector('[data-survey-chart="timeline"]');
   const recentNode = root.querySelector('[data-admin-surveys-recent]');
 
-  renderBarChart(ageChartNode, stats.ageEntries, stats.total, resolveAgeLabel, 'Нет распределения по возрасту.');
-  renderBarChart(districtChartNode, stats.districtEntries.slice(0, 10), stats.total, (key) => key, 'Нет распределения по районам.');
-  renderBarChart(topicChartNode, stats.topicEntries, stats.total, resolveTopicLabel, 'Нет распределения по темам.');
-  renderBarChart(satisfactionChartNode, stats.satisfactionEntries, stats.total, resolveSatisfactionLabel, 'Нет оценок удовлетворенности.');
+  renderBarChart(ageChartNode, stats.ageEntries, stats.total, resolveAgeLabel, { emptyText: 'Нет распределения по возрасту.' });
+  renderBarChart(districtChartNode, stats.districtEntries.slice(0, 10), stats.total, (key) => key, { emptyText: 'Нет распределения по районам.' });
+  renderBarChart(topicChartNode, stats.topicEntries, stats.total, resolveTopicLabel, { emptyText: 'Нет распределения по темам.' });
+  renderBarChart(satisfactionChartNode, stats.satisfactionEntries, stats.total, resolveSatisfactionLabel, {
+    emptyText: 'Нет оценок удовлетворенности.',
+    palette: SAT_COLORS
+  });
+  if (satisfactionPieNode) {
+    renderSatisfactionPie(satisfactionPieNode, stats.satisfactionEntries, stats.total);
+  }
+  if (timelineNode) {
+    renderTimeline(timelineNode, surveys);
+  }
   renderRecentSurveys(surveys, recentNode);
 };
 
@@ -475,37 +683,9 @@ const toCsvCell = (value) => {
 
 const buildSurveysCsv = (surveys) => {
   const header = [
-    'ID',
-    'Дата и время',
-    'Анонимная',
-    'Возрастная группа',
-    'Район',
-    'Темы развития',
-    'Проблемы мобильности',
-    'Удобство поездок',
-    'Проблемы с парковкой',
-    'Любимые пространства',
-    'Где не хватает пространств',
-    'Доступность соц. объектов',
-    'Каких объектов не хватает',
-    'Качество взаимодействия',
-    'Готовность участвовать',
-    'Занятость',
-    'Приоритеты экономики',
-    'Барьеры для бизнеса',
-    'Экологические проблемы',
-    'Исторические места',
-    'Природные территории',
-    'Туристические маршруты',
-    'Частота поездок',
-    'Что улучшить в связях',
-    'Приоритетный проект',
-    'Топ-3 проекта',
-    'Оценка удовлетворённости',
-    'Комментарий'
+    'ID', 'Дата и время', 'Анонимная', 'Возраст', 'Район', 'Тип района',
+    'Темы', 'Контекст участия', 'Приоритетный проект', 'Оценка', 'Комментарий'
   ];
-
-  // ...и порядок колонок должен совпадать с row[]. Ниже есть assert при экспорте.
 
   const formatChecked = (list) => Array.isArray(list)
     ? list.map((item) => normalize(item)).filter(Boolean).join(', ')
@@ -515,36 +695,10 @@ const buildSurveysCsv = (surveys) => {
     const topics = Array.isArray(survey.topics)
       ? survey.topics.map((topic) => resolveTopicLabel(normalize(topic))).join(', ')
       : '';
-    const transportProblems = Array.isArray(survey.transportProblems)
-      ? survey.transportProblems.join(', ')
-      : '';
-    const carParking = Array.isArray(survey.carParkingIssues)
-      ? survey.carParkingIssues.join(', ')
-      : '';
-    const spacesMissing = Array.isArray(survey.spacesMissing)
-      ? survey.spacesMissing.join(', ')
-      : '';
-    const socialAccess = Array.isArray(survey.socialAccessSectors)
-      ? survey.socialAccessSectors.join(', ')
-      : '';
-    const socialObjects = Array.isArray(survey.socialObjectNeeds)
-      ? survey.socialObjectNeeds.join(', ')
-      : '';
-    const participantCtx = Array.isArray(survey.participantContext)
+    const ctx = Array.isArray(survey.participantContext)
       ? survey.participantContext.join(', ')
       : '';
-    const economyP = Array.isArray(survey.economyPriorities)
-      ? survey.economyPriorities.join(', ')
-      : '';
-    const businessB = Array.isArray(survey.businessBarriers)
-      ? survey.businessBarriers.join(', ')
-      : '';
-    const ecologyP = Array.isArray(survey.ecologyProblems)
-      ? survey.ecologyProblems.join(', ')
-      : '';
-    const intermun = Array.isArray(survey.intermunicipalNeeds)
-      ? survey.intermunicipalNeeds.join(', ')
-      : '';
+    const fixedComment = fixMojibakeInText(normalize(survey.comment));
 
     return [
       survey.id ?? '',
@@ -552,36 +706,19 @@ const buildSurveysCsv = (surveys) => {
       survey.isAnonymous ? 'да' : 'нет',
       resolveAgeLabel(normalize(survey.ageGroup)),
       normalize(survey.district),
+      survey.districtChoice || '',
       topics,
-      transportProblems,
-      normalize(survey.commuteTime),
-      carParking,
-      normalize(survey.placesLove),
-      spacesMissing,
-      socialAccess,
-      socialObjects,
-      participantCtx,
-      normalize(survey.ideaReady),
-      normalize(survey.employmentStatus),
-      economyP,
-      businessB,
-      ecologyP,
-      normalize(survey.heritageObjects),
-      normalize(survey.naturePlaces),
-      normalize(survey.tourismRoutes),
-      normalize(survey.agglomerationTrips),
-      intermun,
+      ctx,
       normalize(survey.priorityProject),
-      normalize(survey.topProjects),
       survey.satisfaction ?? '',
-      normalize(survey.comment)
+      fixedComment
     ];
   });
 
   if (typeof console !== 'undefined' && console.warn) {
     rows.forEach((row, idx) => {
       if (row.length !== header.length) {
-        console.warn(`[portal-admin] survey #${surveys[idx]?.id ?? idx}: колонок ${row.length}, ожидалось ${header.length} (${header.length})`);
+        console.warn(`[portal-admin] survey #${surveys[idx]?.id ?? idx}: колонок ${row.length}, ожидалось ${header.length}`);
       }
     });
   }
@@ -595,7 +732,6 @@ const downloadTextFile = (fileName, content, mimeType) => {
   const blob = new Blob([content], { type: mimeType });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
-
   link.href = url;
   link.download = fileName;
   document.body.appendChild(link);
@@ -620,6 +756,7 @@ export function initPortalAdmin() {
     dateTo: root.querySelector('[data-survey-filter="dateTo"]'),
     district: root.querySelector('[data-survey-filter="district"]'),
     ageGroup: root.querySelector('[data-survey-filter="ageGroup"]'),
+    anonymous: root.querySelector('[data-survey-filter="anonymous"]'),
     reset: root.querySelector('[data-survey-filter-reset]'),
     meta: root.querySelector('[data-survey-filter-meta]')
   };
@@ -627,19 +764,21 @@ export function initPortalAdmin() {
   let surveysCache = [];
   let filteredSurveysCache = [];
 
-  const readToken = () => normalizeToken(tokenInput?.value || localStorage.getItem(ADMIN_TOKEN_STORAGE_KEY) || '');
+  const readToken = () => normalize(tokenInput?.value || localStorage.getItem(ADMIN_TOKEN_STORAGE_KEY) || '');
 
   const saveToken = (token) => {
     if (!token) {
       localStorage.removeItem(ADMIN_TOKEN_STORAGE_KEY);
       return;
     }
-
     localStorage.setItem(ADMIN_TOKEN_STORAGE_KEY, token);
   };
 
   const loadAnalytics = async () => {
-    const body = await fetchJson(ANALYTICS_ENDPOINT);
+    const token = readToken();
+    const body = await fetchJson(ANALYTICS_ENDPOINT, {
+      headers: authHeaders(token)
+    });
     renderAnalytics(body.data || {}, analyticsNode);
   };
 
@@ -675,7 +814,6 @@ export function initPortalAdmin() {
     if (!filteredSurveysCache.length) {
       throw new Error('Нет анкет по текущему фильтру. Измените фильтр или загрузите данные.');
     }
-
     const stamp = new Date().toISOString().slice(0, 10);
     const scope = filteredSurveysCache.length === surveysCache.length ? 'all' : 'filtered';
 
@@ -692,7 +830,6 @@ export function initPortalAdmin() {
     const jsonBody = JSON.stringify(filteredSurveysCache, null, 2);
     downloadTextFile(
       `tver-surveys-${scope}-${stamp}.json`,
-      jsonBody,
       'application/json;charset=utf-8'
     );
   };
@@ -722,9 +859,7 @@ export function initPortalAdmin() {
 
   const moderateIdea = async (ideaId, action, comment) => {
     const token = readToken();
-    if (!token) {
-      throw new Error('Сначала укажите admin токен.');
-    }
+    if (!token) throw new Error('Сначала укажите admin токен.');
 
     await fetchJson(`${MODERATION_IDEAS_ENDPOINT}/${ideaId}`, {
       method: 'PATCH',
@@ -738,9 +873,7 @@ export function initPortalAdmin() {
 
   const resolvePersonalDataRequest = async (requestId, action, comment) => {
     const token = readToken();
-    if (!token) {
-      throw new Error('Сначала укажите admin токен.');
-    }
+    if (!token) throw new Error('Сначала укажите admin токен.');
 
     await fetchJson(`${PERSONAL_DATA_REQUESTS_ENDPOINT}/${requestId}`, {
       method: 'PATCH',
@@ -763,7 +896,8 @@ export function initPortalAdmin() {
     surveyFilterControls.dateFrom,
     surveyFilterControls.dateTo,
     surveyFilterControls.district,
-    surveyFilterControls.ageGroup
+    surveyFilterControls.ageGroup,
+    surveyFilterControls.anonymous
   ].filter(Boolean);
 
   filterInputs.forEach((input) => {
@@ -778,6 +912,7 @@ export function initPortalAdmin() {
       if (surveyFilterControls.dateTo) surveyFilterControls.dateTo.value = '';
       if (surveyFilterControls.district) surveyFilterControls.district.value = '';
       if (surveyFilterControls.ageGroup) surveyFilterControls.ageGroup.value = '';
+      if (surveyFilterControls.anonymous) surveyFilterControls.anonymous.value = '';
       refreshSurveyDashboard();
     });
   }
@@ -853,11 +988,17 @@ export function initPortalAdmin() {
     });
   }
 
-  loadAnalytics()
-    .then(() => {
-      setStatus(statusNode, 'Аналитика загружена. Для дашборда опросов и модерации укажите admin токен.', 'muted');
-    })
-    .catch((error) => {
-      setStatus(statusNode, error.message || 'Не удалось загрузить аналитику.', 'error');
-    });
+  // Только если есть токен — пытаемся сразу загрузить аналитику.
+  // Иначе ждём, пока пользователь введёт токен и нажмёт «Загрузить данные».
+  if (readToken()) {
+    loadAnalytics()
+      .then(() => {
+        setStatus(statusNode, 'Аналитика загружена. Для модерации/выгрузки используйте кнопку «Загрузить данные».', 'muted');
+      })
+      .catch((error) => {
+        setStatus(statusNode, error.message || 'Не удалось загрузить аналитику.', 'error');
+      });
+  } else {
+    setStatus(statusNode, 'Укажите admin токен и нажмите «Загрузить данные».', 'muted');
+  }
 }
