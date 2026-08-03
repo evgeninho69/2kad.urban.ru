@@ -462,6 +462,10 @@ const initSurveyForm = () => {
       comment: normalize(data.get('comment')),
     };
 
+    // Сырые строковые значения из формы — нужны для валидации
+    // (например, чтобы отличить «другая территория» от выбора из списка).
+    payload._raw = { districtChoice, districtOther };
+
     return payload;
   };
 
@@ -485,21 +489,22 @@ const initSurveyForm = () => {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const payload = collectPayload();
-    const validationError = validate(payload);
-
-    if (validationError) {
-      setStatus(statusNode, validationError, 'error');
-      return;
-    }
-
-    if (submitButton) {
-      submitButton.disabled = true;
-      submitButton.textContent = 'Отправка...';
-    }
-    setStatus(statusNode, 'Отправляем анкету...', 'muted');
-
     try {
+      const payload = collectPayload();
+      const validationError = validate(payload);
+
+      if (validationError) {
+        setStatus(statusNode, validationError, 'error');
+        return;
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Отправка...';
+      }
+      setStatus(statusNode, 'Отправляем анкету...', 'muted');
+
+      try {
       await fetchJson('/api/tver-portal/surveys', {
         method: 'POST',
         headers: {
@@ -525,6 +530,15 @@ const initSurveyForm = () => {
       }, 5000);
     } catch (error) {
       setStatus(statusNode, error.message || 'Не удалось отправить анкету. Попробуйте позже.', 'error');
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Отправить анкету';
+      }
+    }
+    } catch (fatalError) {
+      // Защита от throw в collectPayload/validate (раньше тихо замораживало форму).
+      console.error('[survey] submit failed:', fatalError);
+      setStatus(statusNode, 'Ошибка отправки: ' + (fatalError && fatalError.message ? fatalError.message : 'попробуйте ещё раз'), 'error');
       if (submitButton) {
         submitButton.disabled = false;
         submitButton.textContent = 'Отправить анкету';
