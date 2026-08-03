@@ -10,10 +10,10 @@ import { initComparison } from './modules/fx-comparison.js';
 import { initScramble } from './modules/fx-scramble.js';
 import { initPointerEffects } from './modules/fx-interactions.js';
 import { initContactForm } from './modules/form-contact.js';
-import { initPortalSurvey } from './modules/portal-survey.js?v=20260521-1';
+import { initPortalSurvey } from './modules/portal-survey.js?v=20260803-1';
 import { initPortalIdeas } from './modules/portal-ideas.js';
 import { initPortalIdeaBank } from './modules/portal-idea-bank.js';
-import { initPortalAdmin } from './modules/portal-admin.js?v=20260520-7';
+import { initPortalAdmin } from './modules/portal-admin.js?v=20260803-1';
 
 const safeInit = (name, initFn) => {
   try {
