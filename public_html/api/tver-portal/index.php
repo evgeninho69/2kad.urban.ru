@@ -98,6 +98,11 @@ function withStoreLock(string $storeFile, callable $callback, int $retentionDays
     $store = json_decode((string)$raw, true);
     if (!is_array($store)) {
         $store = defaultStore();
+    } else {
+        // Лечим исторические store.json без некоторых ключей
+        // (например, 'likes' добавили позже). Дефолт → текущее, чтобы
+        // уже сохранённые данные не затирались, а недостающее дополнялось.
+        $store = array_replace_recursive(defaultStore(), $store);
     }
     try {
         $result = $callback($store);
@@ -296,7 +301,7 @@ if ($route === 'analytics' && $method === 'GET') {
             'ideasTotal' => count($store['ideas']),
             'ideasApproved' => $ideasApproved,
             'ideasPending' => $ideasPending,
-            'likesTotal' => count($store['likes']),
+            'likesTotal' => is_array($store['likes'] ?? null) ? count($store['likes']) : 0,
         ];
     }, $config['retentionDays']);
     jsonResponse(200, ['ok' => true, 'data' => $data]);
