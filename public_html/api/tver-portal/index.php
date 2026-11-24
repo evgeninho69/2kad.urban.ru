@@ -17,7 +17,8 @@ $config = [
     'policyVersion' => '2026-05-19',
     'retentionDays' => 365,
     'contactEmail' => 'info@2kad.ru',
-    'adminToken' => 'tver-admin-ВАШ_ТОКЕН_ЗДЕСЬ',
+    'adminToken' => (string)(getenv('TVER_PORTAL_ADMIN_API_TOKEN')
+        ?: ($_SERVER['TVER_PORTAL_ADMIN_API_TOKEN'] ?? '')),
 ];
 
 // Telegram-уведомления (бот для алертов в админский канал).

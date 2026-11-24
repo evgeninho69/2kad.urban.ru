@@ -27,8 +27,10 @@ if ($tokenFromEnv === '') {
     $tokenFromEnv = (string)($_SERVER['TVER_PORTAL_ADMIN_API_TOKEN'] ?? '');
 }
 if ($tokenFromEnv === '') {
-    // Хардкод для надёжности (тот же что в .htaccess)
-    $tokenFromEnv = 'tver-admin-ВАШ_ТОКЕН_ЗДЕСЬ';
+    // Токен задаётся на сервере (SetEnv TVER_PORTAL_ADMIN_API_TOKEN в .htaccess сервера)
+    http_response_code(500);
+    echo json_encode(['error' => 'Admin token не настроен на сервере.'], JSON_UNESCAPED_UNICODE);
+    exit;
 }
 
 // --- auth ---
@@ -42,7 +44,7 @@ if ($provided === '') {
 }
 if (!hash_equals($tokenFromEnv, $provided)) {
     http_response_code(401);
-    echo json_encode(['error' => 'Unauthorized — нужен X-Admin-Token', 'env_token_present' => $tokenFromEnv !== 'tver-admin-ВАШ_ТОКЕН_ЗДЕСЬ'], JSON_UNESCAPED_UNICODE);
+    echo json_encode(['error' => 'Unauthorized — нужен X-Admin-Token', 'env_token_present' => $tokenFromEnv !== ''], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
