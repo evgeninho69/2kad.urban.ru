@@ -1,4 +1,6 @@
-SetEnv TVER_PORTAL_ADMIN_API_TOKEN "tver-admin-ВАШ_ТОКЕН_ЗДЕСЬ"
+# ВНИМАНИЕ: токен админ-API задаётся ТОЛЬКО на сервере, в git не хранится:
+#   SetEnv TVER_PORTAL_ADMIN_API_TOKEN "<новый_токен>"
+# Токен, попавший в репозиторий, считается скомпрометированным — перевыпустите его.
 
 RewriteEngine On
 

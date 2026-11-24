@@ -21,3 +21,16 @@ node_modules/
 # Telegram bot secrets & one-shot setup
 public_html/api/tver-portal/telegram-config.php
 public_html/api/tver-portal/telegram-setup.php
+
+# --- secrets / локальное окружение ---
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.env
+config.env
+credentials.json
+secrets.json
+*.pem
+*.key
+*.p12
